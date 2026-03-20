@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://6kqy80gkwyjl"]
 
 [ext_resource type="Script" uid="uid://debmpm054nddi" path="res://scenes/entities/player/player.gd" id="1_1hmtu"]
-[ext_resource type="PackedScene" uid="uid://bxgvob2tioxk1" path="res://scenes/entities/player/camera_controller.tscn" id="2_635qg"]
+[ext_resource type="PackedScene" uid="uid://bxgvob2tioxk1" path="res://scenes/entities/player/camera_controller/camera_controller.tscn" id="2_635qg"]
 [ext_resource type="PackedScene" uid="uid://c1t2lberop5f5" path="res://scenes/entities/player/visuals/visuals.res" id="2_ovg4i"]
 [ext_resource type="PackedScene" uid="uid://cdklddtlowcnw" path="res://scenes/entities/player/model/player_model.tscn" id="4_bj7e2"]
+[ext_resource type="Script" uid="uid://2myvvvkbk078" path="res://scenes/entities/player/rotation_controller/rotation_controller.gd" id="6_8akj5"]
 [ext_resource type="Script" uid="uid://bs8jphfhn1sjg" path="res://scenes/entities/player/input_gatherer.gd" id="8_1murt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yel1f"]
@@ -27,3 +28,7 @@ player = NodePath("..")
 
 [node name="Input" type="Node" parent="." unique_id=1857562352]
 script = ExtResource("8_1murt")
+
+[node name="RotationController" type="Node" parent="." unique_id=133974731 node_paths=PackedStringArray("player")]
+script = ExtResource("6_8akj5")
+player = NodePath("..")

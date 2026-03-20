@@ -21,5 +21,7 @@ func update(input : InputPackage, delta : float):
 		delta,
 		SPEED
 	)
+	player.rotation_controller.mode = "move"
+	player.rotation_controller.update(direction, delta)
 
 	player.move_and_slide()

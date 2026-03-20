@@ -34,6 +34,8 @@ func update(input : InputPackage, delta : float):
 	pass
 
 func switch_to(next_state : String):
+	if not states.has(next_state):
+		return
 	current_state.on_exit_state()
 	current_state = states[next_state]
 	current_state.on_enter_state()
