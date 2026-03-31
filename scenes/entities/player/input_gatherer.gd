@@ -5,17 +5,25 @@ class_name InputGatherer
 
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
-	new_input.input_direction = Input.get_vector("move_left", "move_right", "move_forward", "move_backward").rotated(-camera.global_rotation.y)
+	new_input.input_direction = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	#new_input.input_direction = new_input.input_direction_no_rotation
 
-	if Input.is_action_just_pressed("move_jump"):
-		new_input.actions.append("jump_run")
+	#print(new_input.input_direction_no_rotation.y)
+	
+	#if Input.is_action_pressed("aim"):
+		#new_input.actions.append("aim")
+		#if Input.is_action_just_pressed("shoot"):
+			#new_input.actions.append("shoot")
+
+	#if Input.is_action_just_pressed("move_jump"):
+		#new_input.actions.append("jump_run")
 	
 	if new_input.input_direction != Vector2.ZERO:
-		new_input.actions.append("run")
+		new_input.actions.append("stand")
 		if Input.is_action_pressed("sprint"):
 			new_input.actions.append("sprint")
 
 	if new_input.actions.is_empty():
-		new_input.actions.append("idle")
+		new_input.actions.append("stand")
 	
 	return new_input

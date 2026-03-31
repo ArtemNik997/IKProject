@@ -3,6 +3,8 @@ class_name VelocityCalculator
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+var calculated_velocity = Vector3.ZERO
+
 func calculate_velocity(
 	current_velocity: Vector3,
 	direction: Vector3,
@@ -21,5 +23,7 @@ func calculate_velocity(
 
 	if not is_on_floor:
 		new_velocity.y -= gravity * delta
-
+	
+	calculated_velocity = new_velocity
+	
 	return new_velocity

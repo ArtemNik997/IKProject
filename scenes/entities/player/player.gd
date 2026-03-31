@@ -5,7 +5,7 @@ class_name Player
 @onready var input_gatherer : InputGatherer = $Input
 @onready var model : PlayerModel = $Model
 @onready var visuals : Node3D = $Visuals
-@onready var rotation_controller: RotationController = $RotationController
+#@onready var rotation_controller: RotationController = $RotationController
 
 @export var jump_speed := 4.0
 @export var base_speed := 4.0
