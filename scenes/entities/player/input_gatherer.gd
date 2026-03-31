@@ -10,8 +10,8 @@ func gather_input() -> InputPackage:
 
 	#print(new_input.input_direction_no_rotation.y)
 	
-	#if Input.is_action_pressed("aim"):
-		#new_input.actions.append("aim")
+	if Input.is_action_pressed("aim"):
+		new_input.actions.append("aim")
 		#if Input.is_action_just_pressed("shoot"):
 			#new_input.actions.append("shoot")
 

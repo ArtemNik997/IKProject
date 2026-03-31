@@ -14,10 +14,7 @@ var current_state : State
 @onready var states = {
 	"stand" : $States/Stand,
 	"sprint" : $States/Sprint,
-	#"sprint" : $States/Sprint,
-	#"jump_run" : $States/JumpRun,
-	#"midair" : $States/Midair,
-	#"landing_run" : $States/LandingRun
+	"aim" : $States/Aim
 }
 
 func _ready() -> void:

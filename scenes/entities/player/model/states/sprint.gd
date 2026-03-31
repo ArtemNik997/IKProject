@@ -12,8 +12,6 @@ func check_relevance(input : InputPackage) -> String:
 		return "midair"
 
 	input.actions.sort_custom(state_priority_sort)
-	if input.actions[0] == "sprint":
-		return "sprint"
 	return input.actions[0]
 
 func update(input : InputPackage, delta : float):
