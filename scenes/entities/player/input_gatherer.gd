@@ -1,14 +1,10 @@
 extends Node
 class_name InputGatherer
 
-@onready var camera : Camera3D = $"../CameraController/SpringArm3D/Camera3D"
-
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
 	new_input.input_direction = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	#new_input.input_direction = new_input.input_direction_no_rotation
 
-	#print(new_input.input_direction_no_rotation.y)
 	
 	if Input.is_action_pressed("aim"):
 		new_input.actions.append("aim")

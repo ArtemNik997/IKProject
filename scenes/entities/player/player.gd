@@ -1,7 +1,6 @@
 extends CharacterBody3D
 class_name Player
 
-@onready var camera : Node3D = $CameraController/SpringArm3D/Camera3D
 @onready var input_gatherer : InputGatherer = $Input
 @onready var model : PlayerModel = $Model
 @onready var visuals : Node3D = $Visuals

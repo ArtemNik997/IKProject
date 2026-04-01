@@ -6,8 +6,9 @@ class_name PlayerModel
 @onready var animator : AnimationPlayer = $SkeletonAnimator
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var velocity_calculator : VelocityCalculator = $VelocityCalculator
-@onready var skeleton : Skeleton3D = %Skeleton3D
-#@onready var rotation_controller : RotationController = $RotationController
+@onready var skeleton : PlayerSkeleton = %Skeleton3D
+@onready var camera_controller : CameraController = $CameraController
+@onready var marker : Marker3D = $CameraController/Marker3D
 
 var current_state : State
 
@@ -22,7 +23,8 @@ var current_state : State
 func _ready() -> void:
 	animation_tree.active = true
 	current_state = states["stand"]
-	#rotation_controller.player = player
+	camera_controller.character_body = player
+	skeleton.accept_target_node(marker)
 	
 	for state in states.values():
 		state.player = player
@@ -32,7 +34,7 @@ func _ready() -> void:
 
 func update(input : InputPackage, delta : float):
 	var relevance = current_state.check_relevance(input)
-	print(relevance)
+	#print(relevance)
 	if relevance != current_state.name.to_lower():
 		switch_to(relevance)
 	current_state.update(input, delta)
@@ -51,9 +53,9 @@ func switch_to(next_state : String):
 
 func update_animation_parameters(input : InputPackage):
 	var blend_position = 1 if input.input_direction.y >= 0 else -1;
-	print(blend_position)
+	#print(blend_position)
 	animation_tree.set("parameters/Idle/blend_position", blend_position * input.input_direction.length())
-	animation_tree.set("parameters/Aim/LegsIdle/blend_position", blend_position * input.input_direction.length())
+	animation_tree.set("parameters/GunStance/LegsIdle/blend_position", blend_position * input.input_direction.length())
 	if current_state is CombatState:
 		animation_tree.set("parameters/GunStance/AnimationTransition/current_state", current_state.animation_transition)
 	pass

@@ -9,6 +9,8 @@ func on_enter_state():
 	PlayerEvents.on_fov_change.emit(fov)
 	playback.travel(animation_node)
 	PlayerEvents.on_animation_tree_parameter_change.emit("parameters/GunStance/ShootAnimTrigger/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
+
+	PlayerEvents.on_ik_start.emit()
 	pass
 
 func update(input : InputPackage, delta : float):
@@ -34,4 +36,5 @@ func on_animation_finished(animation_name: String):
 		is_weapon_shot = true
 
 func on_exit_state():
+	PlayerEvents.on_ik_stop.emit()
 	is_weapon_shot = false
