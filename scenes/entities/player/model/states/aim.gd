@@ -1,13 +1,11 @@
-extends State
+extends CombatState
 class_name Aim
 
 const SPEED := 4
 
-const aim_fov : float = 50
-
 func on_enter_state():
-	PlayerEvents.on_enter_aim.emit(50)
-	playback.travel(animation)
+	PlayerEvents.on_fov_change.emit(fov)
+	playback.travel(animation_node)
 
 func check_relevance(input : InputPackage) -> String:
 	if not player.is_on_floor():
@@ -29,4 +27,5 @@ func update(input : InputPackage, delta : float):
 	player.move_and_slide()
 
 func on_exit_state():
-	PlayerEvents.on_exit_aim.emit()
+	#PlayerEvents.on_exit_aim.emit()
+	pass

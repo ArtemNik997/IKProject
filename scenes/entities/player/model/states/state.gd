@@ -2,15 +2,18 @@ extends Node
 class_name State
 
 @export var player : CharacterBody3D
-@export var animation : String
+@export var animation_node : String
 @export var velocity_calculator: VelocityCalculator
+@export var fov: float = 75
 
 var playback : AnimationNodeStateMachinePlayback
 
 static var state_priority : Dictionary = {
 	"stand" : 1,
 	"aim" : 2,
-	"sprint" : 4,
+	"shoot": 3,
+	"reload": 4,
+	"sprint" : 9,
 	"midair" : 10
 }
 
@@ -33,4 +36,7 @@ func on_enter_state():
 	pass
 
 func on_exit_state():
+	pass
+
+func on_animation_finished(animation_name: String):
 	pass

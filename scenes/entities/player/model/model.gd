@@ -14,7 +14,9 @@ var current_state : State
 @onready var states = {
 	"stand" : $States/Stand,
 	"sprint" : $States/Sprint,
-	"aim" : $States/Aim
+	"aim" : $States/Aim,
+	"shoot" : $States/Shoot,
+	"reload": $States/Reload
 }
 
 func _ready() -> void:
@@ -26,6 +28,7 @@ func _ready() -> void:
 		state.player = player
 		state.velocity_calculator = velocity_calculator
 		state.playback = animation_tree["parameters/playback"]
+		animation_tree.animation_finished.connect(state.on_animation_finished)
 
 func update(input : InputPackage, delta : float):
 	var relevance = current_state.check_relevance(input)
@@ -50,5 +53,7 @@ func update_animation_parameters(input : InputPackage):
 	var blend_position = 1 if input.input_direction.y >= 0 else -1;
 	print(blend_position)
 	animation_tree.set("parameters/Idle/blend_position", blend_position * input.input_direction.length())
-	#animation_tree.set("parameters/CombatIdle/blend_position", direction.x)
+	animation_tree.set("parameters/Aim/LegsIdle/blend_position", blend_position * input.input_direction.length())
+	if current_state is CombatState:
+		animation_tree.set("parameters/GunStance/AnimationTransition/current_state", current_state.animation_transition)
 	pass

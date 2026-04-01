@@ -16,8 +16,7 @@ var std_fov = 0
 
 func _ready() -> void:
 	std_fov = target_fov
-	PlayerEvents.on_enter_aim.connect(change_fov)
-	PlayerEvents.on_exit_aim.connect(reset_fov)
+	PlayerEvents.on_fov_change.connect(change_fov)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):

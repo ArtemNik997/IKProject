@@ -7,7 +7,8 @@ func _ready() -> void:
 	pass
 
 func on_enter_state():
-	playback.travel(animation)
+	PlayerEvents.on_fov_change.emit(fov)
+	playback.travel(animation_node)
 	pass
 
 func update(input : InputPackage, delta : float):

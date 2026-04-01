@@ -3,11 +3,14 @@
 [ext_resource type="Script" uid="uid://btacxjwkfpwg2" path="res://scenes/entities/player/model/model.gd" id="1_r3do8"]
 [ext_resource type="Script" uid="uid://fd73vikyp838" path="res://scenes/entities/player/model/skeleton_animator.gd" id="2_0kivn"]
 [ext_resource type="Script" uid="uid://d4nju2ys1w1wr" path="res://scenes/entities/player/model/states/stand.gd" id="3_qccoj"]
+[ext_resource type="Script" uid="uid://lbh0oqd8l1rq" path="res://scenes/entities/player/model/animation_tree/animation_tree.gd" id="3_qqfxv"]
 [ext_resource type="Script" uid="uid://dx51gm1wd5o1w" path="res://scenes/entities/player/model/states/sprint.gd" id="4_4s736"]
 [ext_resource type="Script" uid="uid://0ggkt0cc113r" path="res://scenes/entities/player/model/states/aim.gd" id="5_qccoj"]
 [ext_resource type="Script" uid="uid://b4qqx7orhe5d2" path="res://scenes/entities/player/model/downcast.gd" id="5_qqfxv"]
+[ext_resource type="Script" uid="uid://yo6utsysw7ci" path="res://scenes/entities/player/model/states/shoot.gd" id="6_4s736"]
 [ext_resource type="Script" uid="uid://bg5xbchxeqwoh" path="res://scenes/entities/player/velocity_calculator.gd" id="6_iqt7u"]
 [ext_resource type="Script" uid="uid://2myvvvkbk078" path="res://scenes/entities/player/rotation_controller/rotation_controller.gd" id="7_0kivn"]
+[ext_resource type="Script" uid="uid://b0iy6ac6y1wf3" path="res://scenes/entities/player/model/states/reload.gd" id="8_iqt7u"]
 
 [sub_resource type="Animation" id="Animation_gtlky"]
 resource_name = "A_TPose"
@@ -12567,38 +12570,46 @@ blend_point_1/pos = -1.0
 blend_point_2/node = SubResource("AnimationNodeAnimation_h6v41")
 blend_point_2/pos = 1.0
 
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_qccoj"]
-
-[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_4s736"]
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lx5mn"]
 animation = &"Pistol_Reload"
 
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_iqt7u"]
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_t227m"]
 animation = &"Pistol_Shoot"
+
+[sub_resource type="AnimationNodeOneShot" id="AnimationNodeOneShot_4s736"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_shhgo"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_qqfxv"]
 
 [sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_qccoj"]
 filter_enabled = true
 filters = ["Armature/Skeleton3D:ball_l", "Armature/Skeleton3D:ball_r", "Armature/Skeleton3D:calf_l", "Armature/Skeleton3D:calf_r", "Armature/Skeleton3D:foot_l", "Armature/Skeleton3D:foot_r", "Armature/Skeleton3D:pelvis", "Armature/Skeleton3D:root", "Armature/Skeleton3D:thigh_l", "Armature/Skeleton3D:thigh_r"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_b5qpm"]
-graph_offset = Vector2(-439.97815, 321.85886)
-nodes/output/position = Vector2(460, 140)
+graph_offset = Vector2(-514.86035, -241.96162)
+nodes/output/position = Vector2(680, 180)
 nodes/Aiming/node = SubResource("AnimationNodeAnimation_shhgo")
-nodes/Aiming/position = Vector2(-520, -300)
+nodes/Aiming/position = Vector2(-400, -220)
 nodes/TorseLegsCombiner/node = SubResource("AnimationNodeBlend2_qccoj")
-nodes/TorseLegsCombiner/position = Vector2(260, 180)
+nodes/TorseLegsCombiner/position = Vector2(420, 200)
 nodes/LegsIdle/node = SubResource("AnimationNodeBlendSpace1D_lx5mn")
-nodes/LegsIdle/position = Vector2(0, 440)
+nodes/LegsIdle/position = Vector2(120, 520)
 nodes/Reload/node = SubResource("AnimationNodeAnimation_lx5mn")
-nodes/Reload/position = Vector2(-320, 120)
-nodes/OneShotReload/node = SubResource("AnimationNodeOneShot_qccoj")
-nodes/OneShotReload/position = Vector2(20, 40)
-nodes/OneShotShoot/node = SubResource("AnimationNodeOneShot_4s736")
-nodes/OneShotShoot/position = Vector2(-240, -220)
+nodes/Reload/position = Vector2(-400, 280)
+nodes/ShootAnimTrigger/node = SubResource("AnimationNodeOneShot_4s736")
+nodes/ShootAnimTrigger/position = Vector2(-80, -120)
 nodes/Shoot/node = SubResource("AnimationNodeAnimation_t227m")
-nodes/Shoot/position = Vector2(-500, -60)
-node_connections = [&"output", 0, &"TorseLegsCombiner", &"TorseLegsCombiner", 0, &"OneShotReload", &"TorseLegsCombiner", 1, &"LegsIdle", &"OneShotReload", 0, &"OneShotShoot", &"OneShotReload", 1, &"Reload", &"OneShotShoot", 0, &"Aiming", &"OneShotShoot", 1, &"Shoot"]
+nodes/Shoot/position = Vector2(-520, 0)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_qqfxv")
+nodes/TimeScale/position = Vector2(-320, 0)
+nodes/ReloadAnimTrigger/node = SubResource("AnimationNodeOneShot_iqt7u")
+nodes/ReloadAnimTrigger/position = Vector2(140, 160)
+"nodes/TimeScale 2/node" = SubResource("AnimationNodeTimeScale_shhgo")
+"nodes/TimeScale 2/position" = Vector2(-120, 240)
+node_connections = [&"output", 0, &"TorseLegsCombiner", &"TorseLegsCombiner", 0, &"ReloadAnimTrigger", &"TorseLegsCombiner", 1, &"LegsIdle", &"ShootAnimTrigger", 0, &"Aiming", &"ShootAnimTrigger", 1, &"TimeScale", &"TimeScale", 0, &"Shoot", &"ReloadAnimTrigger", 0, &"ShootAnimTrigger", &"ReloadAnimTrigger", 1, &"TimeScale 2", &"TimeScale 2", 0, &"Reload"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qccoj"]
 animation = &"Jog_Fwd"
@@ -12634,13 +12645,13 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qccoj"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_iqt7u"]
-states/Aim/node = SubResource("AnimationNodeBlendTree_b5qpm")
-states/Aim/position = Vector2(544, 100)
+states/GunStance/node = SubResource("AnimationNodeBlendTree_b5qpm")
+states/GunStance/position = Vector2(576, 100)
 states/Idle/node = SubResource("AnimationNodeBlendSpace1D_4s736")
 states/Idle/position = Vector2(378, 100)
 states/Sprint/node = SubResource("AnimationNodeAnimation_iqt7u")
 states/Sprint/position = Vector2(378, 190)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqfxv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_shhgo"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_b5qpm"), "Idle", "Aim", SubResource("AnimationNodeStateMachineTransition_5tox7"), "Aim", "Idle", SubResource("AnimationNodeStateMachineTransition_qccoj")]
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_qqfxv"), "Idle", "Sprint", SubResource("AnimationNodeStateMachineTransition_shhgo"), "Sprint", "Idle", SubResource("AnimationNodeStateMachineTransition_b5qpm"), "Idle", "GunStance", SubResource("AnimationNodeStateMachineTransition_5tox7"), "GunStance", "Idle", SubResource("AnimationNodeStateMachineTransition_qccoj")]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axmoa"]
 albedo_color = Color(0.71207166, 0.4805944, 1.1551381e-06, 1)
@@ -12658,15 +12669,18 @@ script = ExtResource("2_0kivn")
 [node name="AnimationTree" type="AnimationTree" parent="." unique_id=948617318]
 tree_root = SubResource("AnimationNodeStateMachine_iqt7u")
 anim_player = NodePath("../SkeletonAnimator")
-parameters/Aim/TorseLegsCombiner/blend_amount = 1.0
-parameters/Aim/LegsIdle/blend_position = 1.0
-parameters/Aim/OneShotReload/active = false
-parameters/Aim/OneShotReload/internal_active = false
-parameters/Aim/OneShotReload/request = 0
-parameters/Aim/OneShotShoot/active = false
-parameters/Aim/OneShotShoot/internal_active = false
-parameters/Aim/OneShotShoot/request = 0
+parameters/GunStance/TorseLegsCombiner/blend_amount = 1.0
+parameters/GunStance/LegsIdle/blend_position = 1.0
+parameters/GunStance/ShootAnimTrigger/active = false
+parameters/GunStance/ShootAnimTrigger/internal_active = false
+parameters/GunStance/ShootAnimTrigger/request = 0
+parameters/GunStance/TimeScale/scale = 5.0
+parameters/GunStance/ReloadAnimTrigger/active = false
+parameters/GunStance/ReloadAnimTrigger/internal_active = false
+parameters/GunStance/ReloadAnimTrigger/request = 0
+"parameters/GunStance/TimeScale 2/scale" = 2.5
 parameters/Idle/blend_position = -0.0008673072
+script = ExtResource("3_qqfxv")
 
 [node name="Armature" type="Node3D" parent="." unique_id=2100232363]
 
@@ -12683,8 +12697,8 @@ bones/1/name = "pelvis"
 bones/1/parent = 0
 bones/1/rest = Transform3D(1, 0, 0, 0, -0.24968077, -0.9683282, 0, 0.9683282, -0.24968076, 0, 0.05010003, 0.9167)
 bones/1/enabled = true
-bones/1/position = Vector3(0.024704237, 0.05007723, 0.903614)
-bones/1/rotation = Quaternion(0.79042923, 0.0075297994, 0.0007584101, 0.6125066)
+bones/1/position = Vector3(0.03838793, 0.050075307, 0.9164373)
+bones/1/rotation = Quaternion(0.79040945, -0.0083844755, 0.005584879, 0.61249614)
 bones/1/scale = Vector3(1, 0.99999994, 0.99999994)
 bones/2/name = "spine_01"
 bones/2/parent = 1
@@ -13062,28 +13076,28 @@ bones/55/parent = 1
 bones/55/rest = Transform3D(1, 0, 0, 0, -0.9700509, -0.24290185, 0, 0.24290189, -0.9700507, 0.089, 0.027770841, 0.046023797)
 bones/55/enabled = true
 bones/55/position = Vector3(0.089, 0.027770841, 0.046023797)
-bones/55/rotation = Quaternion(0.97659206, -0.0112078935, 0.0013819028, 0.2148033)
+bones/55/rotation = Quaternion(0.9919555, -0.031546976, 0.003889654, 0.12253204)
 bones/55/scale = Vector3(1, 1, 0.9999998)
 bones/56/name = "calf_l"
 bones/56/parent = 55
 bones/56/rest = Transform3D(0.99999994, 3.637979e-12, -0.00026252217, -1.9196365e-05, 0.99732286, -0.073122814, 0.00026181937, 0.07312282, 0.9973228, 7.450581e-09, 0.40030977, -2.3283064e-10)
 bones/56/enabled = true
 bones/56/position = Vector3(7.450581e-09, 0.40030977, -2.3283064e-10)
-bones/56/rotation = Quaternion(0.19035335, -0.0014407366, 0.00026552283, 0.98171455)
+bones/56/rotation = Quaternion(0.1592591, -0.0033407547, 0.000531197, 0.9872311)
 bones/56/scale = Vector3(0.99999994, 0.9999999, 0.9999999)
 bones/57/name = "foot_l"
 bones/57/parent = 56
 bones/57/rest = Transform3D(0.9999995, -0.00023572295, -0.00092024705, 0.00093006215, 0.44016603, 0.8979159, 0.00019340208, -0.89791644, 0.440166, -7.219114e-09, 0.4294799, 2.408342e-09)
 bones/57/enabled = true
 bones/57/position = Vector3(-7.219114e-09, 0.4294799, 2.408342e-09)
-bones/57/rotation = Quaternion(-0.5775788, 0.0119348075, -0.0108496845, 0.8161756)
+bones/57/rotation = Quaternion(-0.5644708, 0.00046066014, -0.012079413, 0.8253646)
 bones/57/scale = Vector3(1, 1, 0.99999994)
 bones/58/name = "ball_l"
 bones/58/parent = 57
 bones/58/rest = Transform3D(-0.9999995, -0.00052895444, -0.0008905963, 2.0838343e-08, 0.85977584, -0.510672, 0.0010358354, -0.51067203, -0.8597749, 3.919922e-09, 0.17330109, -8.578354e-09)
 bones/58/enabled = true
 bones/58/position = Vector3(3.919922e-09, 0.17330109, -8.578354e-09)
-bones/58/rotation = Quaternion(-0.00023064273, 0.9635942, -0.2673685, -0.00052392605)
+bones/58/rotation = Quaternion(-0.0030519115, 0.93972814, -0.34190744, -0.0010287921)
 bones/58/scale = Vector3(1, 1.0000004, 0.99999976)
 bones/59/name = "ball_leaf_l"
 bones/59/parent = 58
@@ -13097,28 +13111,28 @@ bones/60/parent = 1
 bones/60/rest = Transform3D(1, 0, 0, 0, -0.9700509, -0.24290185, 0, 0.24290189, -0.9700507, -0.089, 0.027770841, 0.046023797)
 bones/60/enabled = true
 bones/60/position = Vector3(-0.089, 0.027770841, 0.046023797)
-bones/60/rotation = Quaternion(0.95464164, -0.011985832, 0.0014778211, 0.2975125)
+bones/60/rotation = Quaternion(0.862454, -0.029724646, 0.0036649692, 0.50524867)
 bones/60/scale = Vector3(1, 1, 0.9999998)
 bones/61/name = "calf_r"
 bones/61/parent = 60
 bones/61/rest = Transform3D(0.99999994, 3.637979e-12, -0.00026252217, -1.9196365e-05, 0.99732286, -0.073122814, 0.00026181937, 0.07312282, 0.9973228, -7.450581e-09, 0.40030977, -2.3283064e-10)
 bones/61/enabled = true
 bones/61/position = Vector3(-7.450581e-09, 0.40030977, -2.3283064e-10)
-bones/61/rotation = Quaternion(0.6472345, -0.0042764577, 0.0036839587, 0.76227015)
+bones/61/rotation = Quaternion(0.6519887, -0.012467786, 0.010708309, 0.75805056)
 bones/61/scale = Vector3(0.99999994, 0.9999999, 0.9999999)
 bones/62/name = "foot_r"
 bones/62/parent = 61
 bones/62/rest = Transform3D(0.9999995, -0.00023572295, -0.00092024705, 0.00093006215, 0.44016603, 0.8979159, 0.00019340208, -0.89791644, 0.440166, 7.682047e-09, 0.42947984, 1.3169483e-09)
 bones/62/enabled = true
 bones/62/position = Vector3(7.682047e-09, 0.42947984, 1.3169483e-09)
-bones/62/rotation = Quaternion(-0.33179918, -0.0051518367, -0.019552538, 0.9431334)
+bones/62/rotation = Quaternion(-0.35871494, -0.011192677, -0.02796623, 0.932961)
 bones/62/scale = Vector3(1, 1, 0.99999994)
 bones/63/name = "ball_r"
 bones/63/parent = 62
 bones/63/rest = Transform3D(-0.9999995, -0.00052895444, -0.0008905963, 2.0838343e-08, 0.85977584, -0.510672, 0.0010358354, -0.51067203, -0.8597749, -3.5306584e-09, 0.17330109, -8.185452e-09)
 bones/63/enabled = true
 bones/63/position = Vector3(-3.5306584e-09, 0.17330109, -8.185452e-09)
-bones/63/rotation = Quaternion(-0.00013713758, 0.9643068, -0.26478708, -0.00049937726)
+bones/63/rotation = Quaternion(-0.00013715254, 0.9643068, -0.26478708, -0.0004993885)
 bones/63/scale = Vector3(1, 1.0000004, 0.99999976)
 bones/64/name = "ball_leaf_r"
 bones/64/parent = 63
@@ -13132,18 +13146,35 @@ bones/64/scale = Vector3(1, 1, 1)
 
 [node name="Stand" type="Node" parent="States" unique_id=459212301 node_paths=PackedStringArray("velocity_calculator")]
 script = ExtResource("3_qccoj")
-animation = "Idle"
+animation_node = "Idle"
 velocity_calculator = NodePath("../../VelocityCalculator")
 
 [node name="Sprint" type="Node" parent="States" unique_id=2063354534 node_paths=PackedStringArray("velocity_calculator")]
 script = ExtResource("4_4s736")
-animation = "Sprint"
+animation_node = "Sprint"
 velocity_calculator = NodePath("../../VelocityCalculator")
+fov = 90.0
 
 [node name="Aim" type="Node" parent="States" unique_id=810507217 node_paths=PackedStringArray("velocity_calculator")]
 script = ExtResource("5_qccoj")
-animation = "Aim"
+animation_transition = "Aim"
+animation_node = "GunStance"
 velocity_calculator = NodePath("../../VelocityCalculator")
+fov = 40.0
+
+[node name="Shoot" type="Node" parent="States" unique_id=661622329 node_paths=PackedStringArray("velocity_calculator")]
+script = ExtResource("6_4s736")
+animation_node = "GunStance"
+velocity_calculator = NodePath("../../VelocityCalculator")
+fov = 40.0
+metadata/_custom_type_script = "uid://b0xfcrm7cv8c"
+
+[node name="Reload" type="Node" parent="States" unique_id=1700106203 node_paths=PackedStringArray("velocity_calculator")]
+script = ExtResource("8_iqt7u")
+animation_node = "GunStance"
+velocity_calculator = NodePath("../../VelocityCalculator")
+fov = 40.0
+metadata/_custom_type_script = "uid://b0xfcrm7cv8c"
 
 [node name="Downcast" type="RayCast3D" parent="." unique_id=1635676901]
 visible = false

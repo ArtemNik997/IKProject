@@ -12,8 +12,10 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_pressed("aim"):
 		new_input.actions.append("aim")
-		#if Input.is_action_just_pressed("shoot"):
-			#new_input.actions.append("shoot")
+		if Input.is_action_just_pressed("shoot"):
+			new_input.actions.append("shoot")
+		if Input.is_action_just_pressed("reload"):
+			new_input.actions.append("reload")
 
 	#if Input.is_action_just_pressed("move_jump"):
 		#new_input.actions.append("jump_run")

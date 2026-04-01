@@ -1,5 +1,6 @@
 extends Node
 
-# Aim state
-signal on_enter_aim(fov : float)
-signal on_exit_aim()
+signal on_fov_change(fov : float)
+
+# Animation signals
+signal on_animation_tree_parameter_change(param_path : String, value: Variant)

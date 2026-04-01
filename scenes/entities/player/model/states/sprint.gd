@@ -4,7 +4,8 @@ class_name Sprint
 const SPEED := 10
 
 func on_enter_state():
-	playback.travel(animation)
+	PlayerEvents.on_fov_change.emit(fov)
+	playback.travel(animation_node)
 	pass
 
 func check_relevance(input : InputPackage) -> String:
