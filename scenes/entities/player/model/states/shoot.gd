@@ -36,5 +36,4 @@ func on_animation_finished(animation_name: String):
 		is_weapon_shot = true
 
 func on_exit_state():
-	PlayerEvents.on_ik_stop.emit()
 	is_weapon_shot = false

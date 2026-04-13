@@ -29,5 +29,4 @@ func update(input : InputPackage, delta : float):
 
 func on_exit_state():
 	#PlayerEvents.on_exit_aim.emit()
-	PlayerEvents.on_ik_stop.emit()
 	pass

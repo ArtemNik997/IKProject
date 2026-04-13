@@ -2,7 +2,7 @@ extends Node3D
 class_name CameraController
 
 @onready var head : Node3D = $"."
-@onready var camera : Camera3D = $"SpringArm3D/Camera3D"
+@onready var camera : Camera3D = $"SpringArm3D/PlayerCamera"
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var camera_sensivity = 0.5
@@ -26,7 +26,7 @@ func _input(event: InputEvent) -> void:
 
 func _process(delta: float) -> void:
 	head.rotation_degrees.x = rotation_vector.x
-	character_body.rotation_degrees.y = rotation_vector.y
+	head.rotation_degrees.y = rotation_vector.y
 	camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -40,6 +40,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotation_vector.x += (event.screen_relative.y * camera_sensivity) # pitch
 		rotation_vector.x = clamp(rotation_vector.x, -90.0, 90.0)
 		rotation_vector.y = wrapf(rotation_vector.y, 0.0,  360.0)
+		PlayerEvents.on_camera_motion.emit(rotation_vector)
 
 func change_fov(fov : float):
 	print("New camera fov: ", fov)

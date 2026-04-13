@@ -8,9 +8,12 @@ class_name PlayerModel
 @onready var velocity_calculator : VelocityCalculator = $VelocityCalculator
 @onready var skeleton : PlayerSkeleton = %Skeleton3D
 @onready var camera_controller : CameraController = $CameraController
-@onready var marker : Marker3D = $CameraController/Marker3D
+@onready var spine_ik_target : Marker3D = $CameraController/SpineIKTarget
 
 var current_state : State
+var curr_blend_pos : float = 0.0
+
+const BLEND_SPEED : float = 3
 
 @onready var states = {
 	"stand" : $States/Stand,
@@ -24,7 +27,7 @@ func _ready() -> void:
 	animation_tree.active = true
 	current_state = states["stand"]
 	camera_controller.character_body = player
-	skeleton.accept_target_node(marker)
+	#skeleton.accept_target_node(spine_ik_target)
 	
 	for state in states.values():
 		state.player = player
@@ -40,7 +43,7 @@ func update(input : InputPackage, delta : float):
 	current_state.update(input, delta)
 	
 	#rotation_controller.update(player.velocity.normalized(), delta)
-	update_animation_parameters(input)
+	update_animation_parameters(input, delta)
 	pass
 
 func switch_to(next_state : String):
@@ -51,11 +54,12 @@ func switch_to(next_state : String):
 	current_state.on_enter_state()	
 	pass
 
-func update_animation_parameters(input : InputPackage):
-	var blend_position = 1 if input.input_direction.y >= 0 else -1;
+func update_animation_parameters(input : InputPackage, delta: float):
+	var forward_input = 1 if input.player_input.y >= 0 else -1;
+	curr_blend_pos = move_toward(curr_blend_pos, forward_input * input.player_input.length(), delta * BLEND_SPEED)
 	#print(blend_position)
-	animation_tree.set("parameters/Idle/blend_position", blend_position * input.input_direction.length())
-	animation_tree.set("parameters/GunStance/LegsIdle/blend_position", blend_position * input.input_direction.length())
+	animation_tree.set("parameters/Idle/blend_position", curr_blend_pos)
+	animation_tree.set("parameters/GunStance/LegsIdle/blend_position", curr_blend_pos)
 	if current_state is CombatState:
 		animation_tree.set("parameters/GunStance/AnimationTransition/current_state", current_state.animation_transition)
 	pass
