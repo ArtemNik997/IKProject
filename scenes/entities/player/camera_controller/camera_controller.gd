@@ -28,6 +28,7 @@ func _process(delta: float) -> void:
 	head.rotation_degrees.x = rotation_vector.x
 	head.rotation_degrees.y = rotation_vector.y
 	camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
+	PlayerGlobals.player_camera_rotation = rotation
 
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion := (
@@ -40,7 +41,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		rotation_vector.x += (event.screen_relative.y * camera_sensivity) # pitch
 		rotation_vector.x = clamp(rotation_vector.x, -90.0, 90.0)
 		rotation_vector.y = wrapf(rotation_vector.y, 0.0,  360.0)
-		PlayerEvents.on_camera_motion.emit(rotation_vector)
+		#PlayerEvents.on_camera_motion.emit(rotation_vector)
 
 func change_fov(fov : float):
 	print("New camera fov: ", fov)

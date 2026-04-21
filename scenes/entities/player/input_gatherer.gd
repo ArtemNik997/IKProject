@@ -3,7 +3,7 @@ class_name InputGatherer
 
 var rotation_vector : Vector3 = Vector3.ZERO
 
-@onready var camera_controller : CameraController = $"../CameraController"
+#@onready var camera_controller : CameraController = $"../CameraController"
 
 func _ready() -> void:
 	PlayerEvents.on_camera_motion.connect(rotate_input_direction)
@@ -11,7 +11,7 @@ func _ready() -> void:
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
 	new_input.player_input = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-	new_input.input_direction = new_input.player_input
+	new_input.input_direction = new_input.player_input.rotated(-PlayerGlobals.player_camera_rotation.y)
 	#.rotated(-camera_controller.rotation.y)
 
 	

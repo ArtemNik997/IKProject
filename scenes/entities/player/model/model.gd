@@ -12,6 +12,7 @@ class_name PlayerModel
 
 var current_state : State
 var curr_blend_pos : float = 0.0
+var look_direction
 
 const BLEND_SPEED : float = 3
 
@@ -55,11 +56,22 @@ func switch_to(next_state : String):
 	pass
 
 func update_animation_parameters(input : InputPackage, delta: float):
-	var forward_input = 1 if input.player_input.y >= 0 else -1;
-	curr_blend_pos = move_toward(curr_blend_pos, forward_input * input.player_input.length(), delta * BLEND_SPEED)
-	#print(blend_position)
+	var input_length = input.player_input.length()
+	var forward_input = 1 if input.player_input.y >= 0 else -1
+	
+	var target_blend = forward_input * input_length
+	
+	# Берем флаг вращения напрямую из узла скелета
+	if input_length < 0.1 and skeleton.is_rotating:
+		# Можно сделать 0.2 или даже -0.2 в зависимости от стороны,
+		# но для начала оставим 0.2 как "универсальное шевеление"
+		target_blend = 0.2 
+		
+	curr_blend_pos = move_toward(curr_blend_pos, target_blend, delta * BLEND_SPEED)
+	curr_blend_pos = move_toward(curr_blend_pos, target_blend, delta * BLEND_SPEED)
+	
 	animation_tree.set("parameters/Idle/blend_position", curr_blend_pos)
 	animation_tree.set("parameters/GunStance/LegsIdle/blend_position", curr_blend_pos)
+	
 	if current_state is CombatState:
 		animation_tree.set("parameters/GunStance/AnimationTransition/current_state", current_state.animation_transition)
-	pass
