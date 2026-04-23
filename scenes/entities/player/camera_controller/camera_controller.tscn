@@ -14,3 +14,6 @@ spring_length = 3.0
 
 [node name="PlayerCamera" type="Camera3D" parent="SpringArm3D" unique_id=911726281]
 unique_name_in_owner = true
+
+[node name="RayCast3D" type="RayCast3D" parent="SpringArm3D/PlayerCamera" unique_id=1958231858]
+target_position = Vector3(0, 0, 10)

@@ -8,7 +8,9 @@ func _ready() -> void:
 
 func on_enter_state():
 	PlayerEvents.on_fov_change.emit(fov)
-	PlayerEvents.on_ik_stop.emit()
+	#PlayerEvents.on_ik_stop.emit()
+	
+	PlayerEvents.on_aim_stop.emit()
 	playback.travel(animation_node)
 	pass
 

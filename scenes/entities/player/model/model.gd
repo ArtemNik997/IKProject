@@ -65,9 +65,8 @@ func update_animation_parameters(input : InputPackage, delta: float):
 	if input_length < 0.1 and skeleton.is_rotating:
 		# Можно сделать 0.2 или даже -0.2 в зависимости от стороны,
 		# но для начала оставим 0.2 как "универсальное шевеление"
-		target_blend = 0.2 
+		target_blend = 0.4
 		
-	curr_blend_pos = move_toward(curr_blend_pos, target_blend, delta * BLEND_SPEED)
 	curr_blend_pos = move_toward(curr_blend_pos, target_blend, delta * BLEND_SPEED)
 	
 	animation_tree.set("parameters/Idle/blend_position", curr_blend_pos)

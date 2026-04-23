@@ -3,12 +3,17 @@ class_name CameraController
 
 @onready var head : Node3D = $"."
 @onready var camera : Camera3D = $"SpringArm3D/PlayerCamera"
+#@onready var camera_aim_target : Marker3D = $SpringArm3D/PlayerCamera/SpringArm3D/CameraAimTarget
+@onready var camera_aim_cast : RayCast3D = $SpringArm3D/PlayerCamera/RayCast3D
 
 @export_group("Camera")
 @export_range(0.0, 1.0) var camera_sensivity = 0.5
 @export var character_body : CharacterBody3D
 @export var target_fov : float = 75
 @export var fov_change_speed : float = 150
+
+@export_group("IK Targets")
+@export var aim_target : Marker3D
 
 var camera_input_direction = Vector2.ZERO
 var rotation_vector = Vector3.ZERO
@@ -29,6 +34,8 @@ func _process(delta: float) -> void:
 	head.rotation_degrees.y = rotation_vector.y
 	camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
 	PlayerGlobals.player_camera_rotation = rotation
+	#aim_target.position = camera_aim_target.position
+	aim_target.position = camera_aim_cast.target_position
 
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion := (

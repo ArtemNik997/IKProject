@@ -5,7 +5,8 @@ const SPEED := 4
 
 func on_enter_state():
 	PlayerEvents.on_fov_change.emit(fov)
-	PlayerEvents.on_ik_start.emit()
+	#PlayerEvents.on_ik_start.emit()
+	PlayerEvents.on_aim_start.emit()
 	playback.travel(animation_node)
 
 func check_relevance(input : InputPackage) -> String:
