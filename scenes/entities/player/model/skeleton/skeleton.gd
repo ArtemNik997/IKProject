@@ -10,7 +10,7 @@ class_name PlayerSkeleton
 @onready var head_look_at_modifier : LookAtModifier3D = $HeadLookAtModifier3D
 @onready var right_hand_two_bone : TwoBoneIK3D = $RightHandBoneIK3D
 @onready var left_hand_two_bone : TwoBoneIK3D = $LeftHandBoneIK3D
-@onready var hands_rotation : CopyTransformModifier3D = $HandsRotaion
+@onready var hands_rotation : CopyTransformModifier3D = $HandsRotation
 
 var is_rotating : bool = false
 var is_aiming : bool = false
@@ -48,12 +48,12 @@ func aim_ik_stop():
 	#head_look_at_modifier.active = true
 
 func handle_body_rotation(delta: float) -> void:
-	var cur_rotation_speed = idle_rotation_speed
-	
-	if is_aiming:
-		cur_rotation_speed = aim_rotation_speed
-	else:
-		cur_rotation_speed = idle_rotation_speed
+	#var cur_rotation_speed = idle_rotation_speed
+	#
+	#if is_aiming:
+		#cur_rotation_speed = aim_rotation_speed
+	#else:
+		#cur_rotation_speed = idle_rotation_speed
 	
 	if not camera_controller:
 		return

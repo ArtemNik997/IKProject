@@ -10,7 +10,9 @@ class_name CameraController
 @export_range(0.0, 1.0) var camera_sensivity = 0.5
 @export var character_body : CharacterBody3D
 @export var target_fov : float = 75
+@export var target_arm_length : float = 2
 @export var fov_change_speed : float = 150
+@export var arm_length_change_speed : float = 150
 
 @export_group("IK Targets")
 @export var aim_target : Marker3D
@@ -22,6 +24,7 @@ var std_fov = 0
 func _ready() -> void:
 	std_fov = target_fov
 	PlayerEvents.on_fov_change.connect(change_fov)
+	PlayerEvents.on_camera_change.connect(change_camera)
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("left_click"):
@@ -58,4 +61,10 @@ func change_fov(fov : float):
 func reset_fov():
 	print("Resetting camera fov")
 	target_fov = std_fov
+	pass
+
+func change_camera(fov : float, arm_length: float):
+	print("New camera fov: ", fov)
+	target_fov = fov
+	target_arm_length = arm_length
 	pass

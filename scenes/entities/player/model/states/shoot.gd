@@ -7,6 +7,7 @@ var is_weapon_shot : bool = false
 
 func on_enter_state():
 	PlayerEvents.on_fov_change.emit(fov)
+	PlayerEvents.on_player_shot.emit()
 	playback.travel(animation_node)
 	PlayerEvents.on_animation_tree_parameter_change.emit("parameters/GunStance/ShootAnimTrigger/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
 
