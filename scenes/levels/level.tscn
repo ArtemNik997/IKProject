@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://6kqy80gkwyjl" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
 [ext_resource type="Material" uid="uid://p72dqsvfya4g" path="res://graphics/prototype-textures/prototype-texture.tres" id="2_bovvr"]
+[ext_resource type="PackedScene" uid="uid://d1iqiuopkfjvr" path="res://scenes/entities/npc/enemy/enemy.tscn" id="3_b2cq8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ftxyw"]
 sky_top_color = Color(0.38431373, 0.45490196, 0.6862745, 1)
@@ -17,6 +18,12 @@ sky = SubResource("Sky_377w7")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="NavigationMesh" id="NavigationMesh_bovvr"]
+vertices = PackedVector3Array(-14.75, 9.5, -14.75, -14.75, 9.5, -12.75, -14.25, 9.5, -14.5, -14, 0.5, -14, -14, 0.5, 14.25, 14.25, 0.5, 14.25, 14.25, 0.5, -14)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(6, 5, 3), PackedInt32Array(3, 5, 4)]
+agent_radius = 0.25
+agent_max_slope = 60.0
+
 [node name="Level" type="Node3D" unique_id=2139346061]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1241335720]
@@ -30,18 +37,24 @@ shadow_enabled = true
 
 [node name="Player" parent="Entities" unique_id=776986641 instance=ExtResource("1_377w7")]
 
-[node name="Environment" type="Node3D" parent="." unique_id=774688454]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=655673237]
+navigation_mesh = SubResource("NavigationMesh_bovvr")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Environment" unique_id=694712310]
+[node name="Environment" type="Node3D" parent="NavigationRegion3D" unique_id=774688454]
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Environment" unique_id=694712310]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="Environment/CSGCombiner3D" unique_id=373534714]
+[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=373534714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
 size = Vector3(30, 10, 30)
 material = ExtResource("2_bovvr")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="Environment/CSGCombiner3D" unique_id=1274124233]
+[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1274124233]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 operation = 2
 size = Vector3(29, 10, 29)
 material = ExtResource("2_bovvr")
+
+[node name="Enemy" parent="." unique_id=353241476 instance=ExtResource("3_b2cq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9027147, -9.536743e-07, -2.699562)

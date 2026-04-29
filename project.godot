@@ -19,6 +19,8 @@ config/icon="res://icon.svg"
 
 PlayerEvents="*uid://dnmwfjcgdesw8"
 PlayerGlobals="*uid://bcyh6v0vilcm1"
+GameEvents="*uid://do23uei1qvx03"
+GameGlobals="*uid://cg7wdh53foopr"
 
 [filesystem]
 
@@ -80,6 +82,8 @@ reload={
 [layer_names]
 
 3d_physics/layer_1="World"
+3d_physics/layer_2="Player"
+3d_physics/layer_3="NPC"
 
 [physics]
 

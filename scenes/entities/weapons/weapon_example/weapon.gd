@@ -3,32 +3,33 @@ class_name Weapon
 
 @export var aim_target : Marker3D
 
-# Настройки отдачи
-@export var recoil_pos_strength : float = 0.15 # Сила подброса вверх
-@export var recoil_rot_strength : float = 15.0 # Угол наклона в градусах
-@export var return_speed : float = 20.0       # Скорость возврата
+@export var recoil_pos_strength : float = 0.15
+@export var recoil_rot_strength : float = 15.0
+@export var return_speed : float = 20.0
 
-# Внутренние переменные для отслеживания состояния
 var target_pos : Vector3 = Vector3.ZERO
 var target_rot : Quaternion = Quaternion.IDENTITY
+var weapon_visible: bool = false
 
 @onready var weapon_mesh : MeshInstance3D = $WeaponMesh
-# Запоминаем исходные локальные трансформации
 @onready var default_pos : Vector3 = weapon_mesh.transform.origin
 @onready var default_rot : Quaternion = weapon_mesh.transform.basis.get_rotation_quaternion()
 
 
 func _ready() -> void:
 	PlayerEvents.on_player_shot.connect(apply_recoil)
+	PlayerEvents.on_aim_start.connect(set_weapon_visible)
+	PlayerEvents.on_aim_stop.connect(set_weapon_invisible)
 
 func _physics_process(delta: float) -> void:
-	# 1. Плавно возвращаем целевые значения к дефолтным (относительно родителя)
+	visible = weapon_visible
+	
 	target_pos = target_pos.lerp(default_pos, return_speed * delta)
 	target_rot = target_rot.slerp(default_rot, return_speed * delta)
 	
-	# 2. Применяем накопленную трансформацию к мешу
 	weapon_mesh.transform.origin = target_pos
 	weapon_mesh.basis = Basis(target_rot)
+	#look_at(-aim_target.global_position)
 
 ## Вызывай эту функцию в момент выстрела
 func apply_recoil():
@@ -40,3 +41,9 @@ func apply_recoil():
 	
 	# Применяем отдачу к текущему вращению
 	target_rot = target_rot * recoil_rotation
+
+func set_weapon_visible():
+	weapon_visible = true
+
+func set_weapon_invisible():
+	weapon_visible = false
