@@ -1,12 +1,12 @@
 extends EnemyState
-class_name Ground
+class_name Wander
 
 @export var velocity_calculator: NPCVelocityCalculator
 @export var enemy_globals: Node
 
 @onready var wander_timer : Timer = $WanderTimer
 
-const SPEED := 0.5
+const SPEED := 0.7
 
 # Вероятность того, что враг будет двигаться, а не стоять на месте (0.5 = 50%)
 @export_range(0.0, 1.0) var wander_probability: float = 0.5
@@ -37,6 +37,7 @@ func update(delta: float):
 	else:
 		velocity_calculator.set_movement(Vector3.ZERO, 0.0)
 		enemy_globals.movement_direction = Vector3.ZERO
+	
 
 func check_relevance(action_package : ActionPackage) -> String:
 	action_package.actions.sort_custom(state_priority_sort)

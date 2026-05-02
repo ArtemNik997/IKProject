@@ -4,7 +4,7 @@ class_name Chase
 @export var velocity_calculator: NPCVelocityCalculator
 @export var enemy_globals: Node
 
-const SPEED = 1.5
+const SPEED = 1.25
 
 func on_enter_state():
 	playback.travel(animation_node)

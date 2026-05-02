@@ -10,13 +10,8 @@ var player : Player = null
 @onready var action_gatherer : ActionGatherer = $ActionGatherer
 
 func _ready() -> void:
-	#player_node_path = get_node(player_node_path)
 	player = GameGlobals.player
 	pass
-
-func _process(delta: float) -> void:
-	pass
-	#enemy_model.update(delta)
 
 func _physics_process(delta: float) -> void:
 	var action_package = action_gatherer.gather_action()

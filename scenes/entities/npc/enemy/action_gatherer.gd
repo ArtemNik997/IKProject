@@ -4,38 +4,43 @@ class_name ActionGatherer
 @export var detection_area : Area3D
 @export var attack_area : Area3D
 
-var new_action : ActionPackage = ActionPackage.new()
+var is_player_detected : bool = false
+var is_player_in_attack_range : bool = false
 
 func _ready():
-	new_action.actions.append("wander")
-	if detection_area == null or attack_area == null:
-		assert("Detection area is null:", str(detection_area == null))
-		assert("Attack area is null:",  str(attack_area == null))
+	if not detection_area or not attack_area:
+		push_error("Areas are not assigned in ActionGatherer!")
 		return
-	detection_area.body_entered.connect(_on_body_detected)
-	attack_area.body_entered.connect(_on_body_to_attack_entered)
-	#attack_area.body_entered.connect(_on_body_to_attack_exited)
+		
+	detection_area.body_entered.connect(_on_detection_entered)
+	
+	attack_area.body_entered.connect(_on_attack_entered)
+	attack_area.body_exited.connect(_on_attack_exited)
 
 func gather_action() -> ActionPackage:
-	if new_action.actions.size() > 100:
-		var last_action = new_action.actions.back()
-		new_action.actions.clear()
-		new_action.actions.append(last_action)
-	return new_action
+	var new_package = ActionPackage.new()
+	
+	new_package.actions.append("wander")
+	
+	if is_player_detected:
+		new_package.actions.append("chase")
+	
+	if is_player_in_attack_range:
+		new_package.actions.append("attack")
+	
+	# Здесь можно добавить логику смерти, если у зомби 0 HP
+	# if enemy_health <= 0: new_package.actions.append("death")
 
-func _on_body_detected(body: Node3D):
-	print("Body detected")
+	return new_package
+
+func _on_detection_entered(body):
 	if body.is_in_group("player"):
-		new_action.actions.append("chase")
-		print("Player entered")
+		is_player_detected = true
 
-func _on_body_to_attack_entered(body: Node3D):
+func _on_attack_entered(body):
 	if body.is_in_group("player"):
-		new_action.actions.append("attack")
-		new_action.actions.append("chase")
-		print("Player entered")
+		is_player_in_attack_range = true
 
-#func _on_body_to_attack_exited(body: Node3D):
-	#if body.is_in_group("player"):
-		#new_action.actions.append("chase")
-		#print("Player entered")
+func _on_attack_exited(body):
+	if body.is_in_group("player"):
+		is_player_in_attack_range = false

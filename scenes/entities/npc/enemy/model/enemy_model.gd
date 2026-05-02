@@ -9,12 +9,14 @@ class_name EnemyModel
 @onready var velocity_calculator: NPCVelocityCalculator = $NPCVelocityCalculator
 @onready var enemy_globals: Node = $EnemyGlobals
 @onready var nav_agent : NavigationAgent3D = $NavigationAgent3D
+@onready var action_gatherer : ActionGatherer = $ActionGatherer
 
 var current_state : EnemyState
 var curr_blend_pos : float = 0.0
 var look_direction
 var player : Player = null
 var rotation_speed: float = 1.0
+var blend_position : float = 0.0
 
 const BLEND_SPEED : float = 3
 
@@ -34,7 +36,8 @@ func _ready() -> void:
 		state.playback = animation_tree["parameters/playback"]
 		pass
 
-func update(delta : float, action_package : ActionPackage):
+func update(delta : float, action_package2 : ActionPackage):
+	var action_package = action_gatherer.gather_action()
 	var relevance = current_state.check_relevance(action_package)
 	#print(relevance)
 	if relevance != current_state.name.to_lower():
@@ -54,7 +57,9 @@ func switch_to(next_state : String):
 	pass
 
 func update_animation_parameters(delta: float):
-	animation_tree.set("parameters/Ground/blend_position", enemy.velocity.normalized().length())
+	blend_position = move_toward(blend_position, 
+		enemy.velocity.normalized().length(), delta * BLEND_SPEED)
+	animation_tree.set("parameters/Ground/blend_position", blend_position)
 	pass
 
 func find_path_direction() -> Vector3:

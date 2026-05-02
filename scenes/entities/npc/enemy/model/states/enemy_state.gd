@@ -23,9 +23,9 @@ static func state_priority_sort(a : String, b : String):
 	else:
 		return false
 
-#func check_relevance(input : InputPackage) -> String:
-	#print_debug("error, implement the check_relevance function on your state")
-	#return "error, implement the check_relevance function on your state"
+func check_relevance(input : ActionPackage) -> String:
+	print_debug("error, implement the check_relevance function on your state")
+	return "error, implement the check_relevance function on your state"
 
 func update(delta : float):
 	pass
