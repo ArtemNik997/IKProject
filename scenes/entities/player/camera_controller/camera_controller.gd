@@ -54,7 +54,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		#PlayerEvents.on_camera_motion.emit(rotation_vector)
 
 func change_fov(fov : float):
-	print("New camera fov: ", fov)
+	#print("New camera fov: ", fov)
 	target_fov = fov
 	pass
 
@@ -64,7 +64,7 @@ func reset_fov():
 	pass
 
 func change_camera(fov : float, arm_length: float):
-	print("New camera fov: ", fov)
+	#print("New camera fov: ", fov)
 	target_fov = fov
 	target_arm_length = arm_length
 	pass

@@ -14,10 +14,11 @@ var weapon_visible: bool = false
 @onready var weapon_mesh : MeshInstance3D = $WeaponMesh
 @onready var default_pos : Vector3 = weapon_mesh.transform.origin
 @onready var default_rot : Quaternion = weapon_mesh.transform.basis.get_rotation_quaternion()
-
+#@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
 	PlayerEvents.on_player_shot.connect(apply_recoil)
+	#PlayerEvents.on_player_shot.connect(play_shoot_animation)
 	PlayerEvents.on_aim_start.connect(set_weapon_visible)
 	PlayerEvents.on_aim_stop.connect(set_weapon_invisible)
 
@@ -41,6 +42,9 @@ func apply_recoil():
 	
 	# Применяем отдачу к текущему вращению
 	target_rot = target_rot * recoil_rotation
+
+#func play_shoot_animation():
+	#animation_player.play("shoot")
 
 func set_weapon_visible():
 	weapon_visible = true

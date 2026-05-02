@@ -11,7 +11,6 @@ class_name Player
 
 func _ready() -> void:
 	GameGlobals.player = self
-	#visuals.accept_skeleton(model.skeleton)
 	pass
 
 func _physics_process(delta: float) -> void:

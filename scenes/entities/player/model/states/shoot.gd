@@ -10,7 +10,6 @@ func on_enter_state():
 	PlayerEvents.on_player_shot.emit()
 	playback.travel(animation_node)
 	PlayerEvents.on_animation_tree_parameter_change.emit("parameters/GunStance/ShootAnimTrigger/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-
 	#PlayerEvents.on_ik_start.emit()
 	PlayerEvents.on_aim_start.emit()
 	pass
