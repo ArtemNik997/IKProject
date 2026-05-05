@@ -22,6 +22,9 @@ func _ready() -> void:
 	PlayerEvents.on_aim_start.connect(set_weapon_visible)
 	PlayerEvents.on_aim_stop.connect(set_weapon_invisible)
 
+func _process(delta: float) -> void:
+	pass
+
 func _physics_process(delta: float) -> void:
 	visible = weapon_visible
 	

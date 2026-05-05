@@ -32,7 +32,15 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 
-func _process(delta: float) -> void:
+#func _process(delta: float) -> void:
+	#head.rotation_degrees.x = rotation_vector.x
+	#head.rotation_degrees.y = rotation_vector.y
+	#camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
+	#PlayerGlobals.player_camera_rotation = rotation
+	##aim_target.position = camera_aim_target.position
+	#aim_target.position = camera_aim_cast.target_position
+
+func _physics_process(delta: float) -> void:
 	head.rotation_degrees.x = rotation_vector.x
 	head.rotation_degrees.y = rotation_vector.y
 	camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
