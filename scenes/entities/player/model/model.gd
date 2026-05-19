@@ -22,7 +22,8 @@ const BLEND_SPEED : float = 3
 	"aim" : $States/Aim,
 	"shoot" : $States/Shoot,
 	"reload": $States/Reload,
-	"jumpstand": $States/JumpStand
+	"jumpstand": $States/JumpStand,
+	"midair" : $States/MidAir
 }
 
 func _ready() -> void:
@@ -40,7 +41,9 @@ func _ready() -> void:
 func update(input : InputPackage, delta : float):
 	var relevance = current_state.check_relevance(input)
 	#print(relevance)
-	if relevance != current_state.name.to_lower():
+	#if relevance == "MidAir":
+		#print("")
+	if relevance.to_lower() != current_state.name.to_lower():
 		switch_to(relevance)
 	current_state.update(input, delta)
 	
