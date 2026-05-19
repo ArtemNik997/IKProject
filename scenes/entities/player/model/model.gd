@@ -21,7 +21,8 @@ const BLEND_SPEED : float = 3
 	"sprint" : $States/Sprint,
 	"aim" : $States/Aim,
 	"shoot" : $States/Shoot,
-	"reload": $States/Reload
+	"reload": $States/Reload,
+	"jumpstand": $States/JumpStand
 }
 
 func _ready() -> void:

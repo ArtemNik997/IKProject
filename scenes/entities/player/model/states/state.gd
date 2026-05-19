@@ -13,6 +13,7 @@ static var state_priority : Dictionary = {
 	"aim" : 2,
 	"shoot": 3,
 	"reload": 4,
+	"jumpstand": 8,
 	"sprint" : 9,
 	"midair" : 10
 }

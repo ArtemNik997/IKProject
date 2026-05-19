@@ -14,6 +14,8 @@ func gather_input() -> InputPackage:
 	new_input.input_direction = new_input.player_input.rotated(-PlayerGlobals.player_camera_rotation.y)
 	#.rotated(-camera_controller.rotation.y)
 
+	if Input.is_action_just_pressed("jump"):
+		new_input.actions.append("jumpstand")
 	
 	if Input.is_action_pressed("aim"):
 		new_input.actions.append("aim")

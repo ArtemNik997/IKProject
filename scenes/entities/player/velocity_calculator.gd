@@ -13,6 +13,11 @@ func calculate_velocity(
 	speed: float
 ) -> Vector3:
 	var new_velocity = current_velocity
+	
+	#print("Direction == Vector3Zero:", direction == Vector3.ZERO )
+	#new_velocity = direction * speed
+	##if direction != Vector3.ZERO:
+		##new_velocity = direction * speed
 
 	if direction != Vector3.ZERO:
 		new_velocity.x = direction.x * speed
