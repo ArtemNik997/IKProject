@@ -27,6 +27,8 @@ const BLEND_SPEED : float = 3
 }
 
 func _ready() -> void:
+	#enemy_globals.player = GameGlobals.player
+	print("enemy_globals.player: ",enemy_globals.player)
 	animation_tree.active = true
 	current_state = states["wander"]
 	velocity_calculator.npc = enemy

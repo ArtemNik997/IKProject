@@ -19,8 +19,8 @@ tonemap_mode = 2
 glow_enabled = true
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_bovvr"]
-vertices = PackedVector3Array(-14.75, 9.5, -14.75, -14.75, 9.5, -12.75, -14.25, 9.5, -14.5, -14, 0.5, -14, -14, 0.5, 14.25, 14.25, 0.5, 14.25, 14.25, 0.5, -14)
-polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(6, 5, 3), PackedInt32Array(3, 5, 4)]
+vertices = PackedVector3Array(-24.75, 9.5, -24.75, -24.75, 9.5, -21.75, -24.25, 9.5, -24.5, -5.25, 0.5, 7.25, -5, 0.5, 9.25, -2.75, 0.5, 9.25, -2.5, 0.5, 7.25, -10.5, 0.5, 7.25, 3.25, 0.5, 7, 3.25, 0.5, -24, -24, 0.5, -24, 2.5, 0.5, 7.25, -24, 0.5, 8.75, -10.75, 0.5, 9, 24.25, 0.5, 7, 24.25, 0.5, -24, 3, 0.5, 7.5, 3, 0.5, 12.5, 3, 0.5, 24.25, 24.25, 0.5, 24.25, -10.25, 1.5, 7.75, -10.25, 1.5, 12.25, -5.75, 1.5, 12.25, -5.75, 1.5, 7.75, -2.25, 2.5, 7.75, -2.25, 2.5, 12.25, 2.25, 2.5, 12.25, 2.25, 2.5, 7.75, -24, 0.5, 11.5, -10.75, 0.5, 11.25, -5, 0.5, 12.5, -2.5, 0.5, 13, -5.5, 0.5, 13, -11, 0.5, 24.25, -10.5, 0.5, 13, 2.5, 0.5, 13, -10.75, 0.5, 12.5, -24, 0.5, 24.25)
+polygons = [PackedInt32Array(2, 1, 0), PackedInt32Array(4, 3, 5), PackedInt32Array(5, 3, 6), PackedInt32Array(3, 7, 8), PackedInt32Array(8, 7, 9), PackedInt32Array(9, 7, 10), PackedInt32Array(8, 11, 6), PackedInt32Array(8, 6, 3), PackedInt32Array(13, 12, 7), PackedInt32Array(7, 12, 10), PackedInt32Array(9, 15, 8), PackedInt32Array(8, 15, 14), PackedInt32Array(16, 11, 8), PackedInt32Array(17, 16, 8), PackedInt32Array(17, 8, 18), PackedInt32Array(18, 8, 14), PackedInt32Array(18, 14, 19), PackedInt32Array(23, 22, 20), PackedInt32Array(20, 22, 21), PackedInt32Array(27, 26, 24), PackedInt32Array(24, 26, 25), PackedInt32Array(29, 28, 13), PackedInt32Array(13, 28, 12), PackedInt32Array(4, 5, 30), PackedInt32Array(30, 5, 31), PackedInt32Array(30, 31, 32), PackedInt32Array(32, 31, 18), PackedInt32Array(32, 18, 33), PackedInt32Array(33, 34, 32), PackedInt32Array(35, 17, 18), PackedInt32Array(33, 36, 34), PackedInt32Array(31, 35, 18), PackedInt32Array(36, 33, 29), PackedInt32Array(29, 33, 28), PackedInt32Array(28, 33, 37)]
 agent_radius = 0.25
 agent_max_slope = 60.0
 
@@ -35,6 +35,9 @@ shadow_enabled = true
 
 [node name="Entities" type="Node3D" parent="." unique_id=1540255887]
 
+[node name="Enemy" parent="Entities" unique_id=353241476 instance=ExtResource("3_b2cq8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9027147, -9.536743e-07, -2.699562)
+
 [node name="Player" parent="Entities" unique_id=776986641 instance=ExtResource("1_377w7")]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=655673237]
@@ -45,16 +48,23 @@ navigation_mesh = SubResource("NavigationMesh_bovvr")
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="NavigationRegion3D/Environment" unique_id=694712310]
 use_collision = true
 
-[node name="CSGBox3D" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=373534714]
+[node name="Walls" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=373534714]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 0)
-size = Vector3(30, 10, 30)
+size = Vector3(50, 10, 50)
 material = ExtResource("2_bovvr")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1274124233]
+[node name="InnerSpace" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1274124233]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
 operation = 2
-size = Vector3(29, 10, 29)
+size = Vector3(49, 10, 49)
 material = ExtResource("2_bovvr")
 
-[node name="Enemy" parent="." unique_id=353241476 instance=ExtResource("3_b2cq8")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9027147, -9.536743e-07, -2.699562)
+[node name="Block" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1954607431]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 10)
+size = Vector3(5, 2, 5)
+material = ExtResource("2_bovvr")
+
+[node name="Block2" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1584470061]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 10)
+size = Vector3(5, 1, 5)
+material = ExtResource("2_bovvr")

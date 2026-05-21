@@ -20,9 +20,11 @@ func calculate_velocity(
 		##new_velocity = direction * speed
 
 	if direction != Vector3.ZERO:
+		PlayerGlobals.player_is_rotating = true
 		new_velocity.x = direction.x * speed
 		new_velocity.z = direction.z * speed
 	else:
+		PlayerGlobals.player_is_rotating = false
 		new_velocity.x = 0
 		new_velocity.z = 0
 

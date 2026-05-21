@@ -15,7 +15,12 @@ func update(delta : float):
 		print("enemy_globals is null:", enemy_globals == null)
 		return
 	
-	var to_player = (enemy_globals.player.global_position - enemy.global_position).normalized()
+	if enemy_globals.player == null:
+		push_error("enemy_globals.player is null")
+		return
+	
+	var to_player = Vector3.ZERO
+	to_player = (enemy_globals.player.global_position - enemy.global_position).normalized()
 	to_player.y = 0
 	enemy_globals.movement_direction = to_player
 	velocity_calculator.set_movement(to_player, SPEED)

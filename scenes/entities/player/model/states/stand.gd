@@ -29,5 +29,7 @@ func update(input : InputPackage, delta : float):
 	player.move_and_slide()
 
 func check_relevance(input: InputPackage) -> String:
+	if not PlayerGlobals.player_is_on_floor:
+		return "midair"
 	input.actions.sort_custom(state_priority_sort)
 	return input.actions[0]

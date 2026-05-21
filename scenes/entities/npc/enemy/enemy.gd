@@ -10,7 +10,6 @@ var player : Player = null
 @onready var action_gatherer : ActionGatherer = $ActionGatherer
 
 func _ready() -> void:
-	player = GameGlobals.player
 	pass
 
 func _physics_process(delta: float) -> void:

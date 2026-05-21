@@ -1,15 +1,13 @@
-extends CombatState
-class_name Reload
+extends State
+class_name Landing
 
-const SPEED := 4
+const SPEED : float = 0.0
 
-var is_weapon_shot : bool = false
+var is_landed = false
 
 func on_enter_state():
-	PlayerEvents.on_fov_change.emit(fov)
+	is_landed = false
 	playback.travel(animation_node)
-	PlayerEvents.on_animation_tree_parameter_change.emit("parameters/GunStance/ReloadAnimTrigger/request", AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE)
-	pass
 
 func update(input : InputPackage, delta : float):
 	var direction = (player.transform.basis * Vector3(input.input_direction.x, 0, input.input_direction.y)).normalized()
@@ -20,20 +18,18 @@ func update(input : InputPackage, delta : float):
 		delta,
 		SPEED
 	)
-
+	
 	player.move_and_slide()
 
 func check_relevance(input : InputPackage) -> String:
-	if not PlayerGlobals.player_is_on_floor:
-		return "midair"
-	if is_weapon_shot:
+	if is_landed:
 		input.actions.sort_custom(state_priority_sort)
 		return input.actions[0]
 	return self.name
 
-func on_animation_finished(animation_name: String):
-	if animation_name == "Pistol_Reload":
-		is_weapon_shot = true
-
 func on_exit_state():
-	is_weapon_shot = false
+	is_landed = false
+
+func on_animation_finished(animation_name: String):
+	if animation_name == animation_node:
+		is_landed = true

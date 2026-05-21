@@ -23,7 +23,9 @@ const BLEND_SPEED : float = 3
 	"shoot" : $States/Shoot,
 	"reload": $States/Reload,
 	"jumpstand": $States/JumpStand,
-	"midair" : $States/MidAir
+	"midair" : $States/MidAir,
+	"landing": $States/Landing,
+	"landingfast": $States/LandingFast,
 }
 
 func _ready() -> void:

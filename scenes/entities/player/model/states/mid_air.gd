@@ -1,11 +1,13 @@
 extends State
 class_name MidAir
 
-const SPEED : float = 3.0
+const SPEED : float = 5.0
 
 @onready var downcast : RayCast3D = $"../../Downcast"
+@onready var coyote_timer : Timer = $CoyoteTimer
 
 var landing_animation_node : String = "Jump_Land_Fast"
+
 
 func on_enter_state():
 	print("Entered MidAir")
@@ -28,7 +30,8 @@ func on_exit_state():
 	#playback.travel(landing_animation_node)
 
 func check_relevance(input : InputPackage) -> String:
-	if downcast.is_on_floor:
-		print("landed")
-		return "stand"
+	input.actions.sort_custom(state_priority_sort)
+	if PlayerGlobals.player_is_on_floor:
+		#print("landed")
+		return "landingfast"
 	return self.name

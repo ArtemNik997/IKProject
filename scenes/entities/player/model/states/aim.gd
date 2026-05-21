@@ -10,7 +10,7 @@ func on_enter_state():
 	playback.travel(animation_node)
 
 func check_relevance(input : InputPackage) -> String:
-	if not player.is_on_floor():
+	if not PlayerGlobals.player_is_on_floor:
 		return "midair"
 
 	input.actions.sort_custom(state_priority_sort)

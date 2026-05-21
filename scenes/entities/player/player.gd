@@ -10,6 +10,7 @@ class_name Player
 @export var base_speed := 4.0
 
 func _ready() -> void:
+	print(self.name)
 	GameGlobals.player = self
 	pass
 
