@@ -23,9 +23,11 @@ const BLEND_SPEED : float = 3
 	"shoot" : $States/Shoot,
 	"reload": $States/Reload,
 	"jumpstand": $States/JumpStand,
+	"jumpsprint": $States/JumpSprint,
 	"midair" : $States/MidAir,
 	"landing": $States/Landing,
 	"landingfast": $States/LandingFast,
+	"crouch": $States/Crouch,
 }
 
 func _ready() -> void:
@@ -74,6 +76,7 @@ func update_animation_parameters(input : InputPackage, delta: float):
 	
 	animation_tree.set("parameters/Idle/blend_position", curr_blend_pos)
 	animation_tree.set("parameters/GunStance/LegsIdle/blend_position", curr_blend_pos)
+	animation_tree.set("parameters/Crouch/blend_position", curr_blend_pos)
 	
 	if current_state is CombatState:
 		animation_tree.set("parameters/GunStance/AnimationTransition/current_state", current_state.animation_transition)

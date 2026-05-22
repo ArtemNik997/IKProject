@@ -1,7 +1,7 @@
 extends State
-class_name JumpStand
+class_name JumpSprint
 
-const SPEED : float = 5.0
+const SPEED : float = 10.0
 const VERTICAL_SPEED : float = 5.0
 
 var is_jumped = false

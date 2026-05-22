@@ -17,6 +17,9 @@ func gather_input() -> InputPackage:
 	if Input.is_action_just_pressed("jump"):
 		new_input.actions.append("jumpstand")
 	
+	if Input.is_action_pressed("crouch"):
+		new_input.actions.append("crouch")
+	
 	if Input.is_action_pressed("aim"):
 		new_input.actions.append("aim")
 		if Input.is_action_just_pressed("shoot"):
@@ -31,6 +34,8 @@ func gather_input() -> InputPackage:
 		new_input.actions.append("stand")
 		if Input.is_action_pressed("sprint"):
 			new_input.actions.append("sprint")
+			if Input.is_action_just_pressed("jump"):
+				new_input.actions.append("jumpsprint")
 
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")

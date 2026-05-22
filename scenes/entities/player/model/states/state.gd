@@ -13,9 +13,11 @@ static var state_priority : Dictionary = {
 	"aim" : 2,
 	"shoot": 3,
 	"reload": 4,
+	"crouch": 5,
 	"jumpstand": 8,
 	"sprint" : 9,
-	"midair" : 10
+	"jumpsprint": 10,
+	"midair" : 11
 }
 
 var enter_state_time : float
