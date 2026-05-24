@@ -10,14 +10,15 @@ var playback : AnimationNodeStateMachinePlayback
 
 static var state_priority : Dictionary = {
 	"stand" : 1,
-	"aim" : 2,
-	"shoot": 3,
-	"reload": 4,
-	"crouch": 5,
+	"crouch": 2,
+	"sprint" : 3,
+	"aim" : 5,
+	"shoot": 6,
+	"reload": 7,
 	"jumpstand": 8,
-	"sprint" : 9,
-	"jumpsprint": 10,
-	"midair" : 11
+	"jumpsprint": 9,
+	"midair" : 11,
+	"hopup" : 10,
 }
 
 var enter_state_time : float

@@ -9,3 +9,4 @@ var player_is_on_floor : bool
 # Parkour vars
 var player_near_wall : bool
 var player_can_climb : bool
+var player_can_hopup : bool

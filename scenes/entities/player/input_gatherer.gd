@@ -13,9 +13,6 @@ func gather_input() -> InputPackage:
 	new_input.player_input = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	new_input.input_direction = new_input.player_input.rotated(-PlayerGlobals.player_camera_rotation.y)
 	#.rotated(-camera_controller.rotation.y)
-
-	if Input.is_action_just_pressed("jump"):
-		new_input.actions.append("jumpstand")
 	
 	if Input.is_action_pressed("crouch"):
 		new_input.actions.append("crouch")
@@ -35,10 +32,20 @@ func gather_input() -> InputPackage:
 		if Input.is_action_pressed("sprint"):
 			new_input.actions.append("sprint")
 			if Input.is_action_just_pressed("jump"):
-				new_input.actions.append("jumpsprint")
-
+				if PlayerGlobals.player_can_hopup:
+					new_input.actions.append("hopup")
+				else:
+					new_input.actions.append("jumpsprint")
+	
+	if Input.is_action_just_pressed("jump"):
+		if PlayerGlobals.player_can_hopup:
+			new_input.actions.append("hopup")
+		else:
+			new_input.actions.append("jumpstand")
+	
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")
+		
 	
 	return new_input
 

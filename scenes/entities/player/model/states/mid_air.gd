@@ -10,7 +10,6 @@ var landing_animation_node : String = "Jump_Land_Fast"
 
 
 func on_enter_state():
-	print("Entered MidAir")
 	playback.start(animation_node)
 
 func update(input : InputPackage, delta : float):
@@ -24,10 +23,6 @@ func update(input : InputPackage, delta : float):
 	)
 
 	player.move_and_slide()
-
-func on_exit_state():
-	print("Exiting MidAir: ", self.name)
-	#playback.travel(landing_animation_node)
 
 func check_relevance(input : InputPackage) -> String:
 	input.actions.sort_custom(state_priority_sort)

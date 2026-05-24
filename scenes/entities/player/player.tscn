@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yel1f"]
 radius = 0.27490234
-height = 1.8
+height = 1.75
 
 [node name="Player" type="CharacterBody3D" unique_id=776986641 groups=["player"]]
 collision_layer = 2
@@ -20,5 +20,5 @@ script = ExtResource("8_1murt")
 player = NodePath("..")
 
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1686717812]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9213867, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_yel1f")

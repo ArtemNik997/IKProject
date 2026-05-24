@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://mfpxyowqi3o3"]
+
+[ext_resource type="Script" uid="uid://c3r5yc51heu1u" path="res://scenes/hud/hud.gd" id="1_48c2t"]
+
+[node name="HUD" type="Control" unique_id=2078074000]
+custom_minimum_size = Vector2(1152, 648)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_48c2t")
+
+[node name="PlayerVars" type="TextEdit" parent="." unique_id=1869562572]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 187.0
+theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
+theme_override_colors/background_color = Color(0, 0, 0, 0)
+text = "CanClimb:"

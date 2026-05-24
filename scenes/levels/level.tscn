@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://6kqy80gkwyjl" path="res://scenes/entities/player/player.tscn" id="1_377w7"]
 [ext_resource type="Material" uid="uid://p72dqsvfya4g" path="res://graphics/prototype-textures/prototype-texture.tres" id="2_bovvr"]
 [ext_resource type="PackedScene" uid="uid://d1iqiuopkfjvr" path="res://scenes/entities/npc/enemy/enemy.tscn" id="3_b2cq8"]
+[ext_resource type="PackedScene" uid="uid://mfpxyowqi3o3" path="res://scenes/hud/hud.tscn" id="4_urvlt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ftxyw"]
 sky_top_color = Color(0.38431373, 0.45490196, 0.6862745, 1)
@@ -26,6 +27,11 @@ agent_max_slope = 60.0
 
 [node name="Level" type="Node3D" unique_id=2139346061]
 
+[node name="HUD" parent="." unique_id=2078074000 instance=ExtResource("4_urvlt")]
+custom_minimum_size = Vector2(200, 200)
+offset_right = 200.0
+offset_bottom = 200.0
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1241335720]
 environment = SubResource("Environment_bovvr")
 
@@ -39,6 +45,7 @@ shadow_enabled = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.9027147, -9.536743e-07, -2.699562)
 
 [node name="Player" parent="Entities" unique_id=776986641 instance=ExtResource("1_377w7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.095705, 0, 5.2199197)
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="." unique_id=655673237]
 navigation_mesh = SubResource("NavigationMesh_bovvr")
@@ -65,6 +72,6 @@ size = Vector3(5, 2, 5)
 material = ExtResource("2_bovvr")
 
 [node name="Block2" type="CSGBox3D" parent="NavigationRegion3D/Environment/CSGCombiner3D" unique_id=1584470061]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.5, 10)
-size = Vector3(5, 1, 5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 0.28087723, 10)
+size = Vector3(5, 0.6, 5)
 material = ExtResource("2_bovvr")

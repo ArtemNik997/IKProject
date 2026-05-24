@@ -1,6 +1,8 @@
 extends Node
 class_name VelocityCalculator
 
+@export var animation_tree : AnimationTree
+
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 var calculated_velocity = Vector3.ZERO
@@ -34,3 +36,10 @@ func calculate_velocity(
 	calculated_velocity = new_velocity
 	
 	return new_velocity
+
+func get_root_motion_velocity(delta: float) -> Vector3:
+	if animation_tree == null or not animation_tree.active or delta <= 0.0:
+		return Vector3.ZERO
+	
+	var root_pos_delta = animation_tree.get_root_motion_position()
+	return root_pos_delta / delta

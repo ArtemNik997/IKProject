@@ -28,6 +28,7 @@ const BLEND_SPEED : float = 3
 	"landing": $States/Landing,
 	"landingfast": $States/LandingFast,
 	"crouch": $States/Crouch,
+	"hopup": $States/HopUp,
 }
 
 func _ready() -> void:
