@@ -35,7 +35,6 @@ func _ready() -> void:
 	animation_tree.active = true
 	current_state = states["stand"]
 	camera_controller.character_body = player
-	#skeleton.accept_target_node(spine_ik_target)
 	
 	for state in states.values():
 		state.player = player
@@ -45,14 +44,10 @@ func _ready() -> void:
 
 func update(input : InputPackage, delta : float):
 	var relevance = current_state.check_relevance(input)
-	#print(relevance)
-	#if relevance == "MidAir":
-		#print("")
 	if relevance.to_lower() != current_state.name.to_lower():
 		switch_to(relevance)
 	current_state.update(input, delta)
 	
-	#rotation_controller.update(player.velocity.normalized(), delta)
 	update_animation_parameters(input, delta)
 	pass
 

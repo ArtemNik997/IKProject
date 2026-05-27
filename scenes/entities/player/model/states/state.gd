@@ -17,8 +17,9 @@ static var state_priority : Dictionary = {
 	"reload": 7,
 	"jumpstand": 8,
 	"jumpsprint": 9,
-	"midair" : 11,
-	"hopup" : 10,
+	"midair" : 10,
+	"landingfast" : 11,
+	"hopup" : 12,
 }
 
 var enter_state_time : float

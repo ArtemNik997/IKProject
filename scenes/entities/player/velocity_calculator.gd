@@ -42,4 +42,10 @@ func get_root_motion_velocity(delta: float) -> Vector3:
 		return Vector3.ZERO
 	
 	var root_pos_delta = animation_tree.get_root_motion_position()
-	return root_pos_delta / delta
+	var local_vel = root_pos_delta / delta
+	
+	# Поворачиваем вектор скорости вокруг мировой оси Y на угол камеры
+	var cam_yaw = PlayerGlobals.player_camera_rotation.y
+	var world_vel = local_vel.rotated(Vector3.UP, cam_yaw)
+	
+	return world_vel

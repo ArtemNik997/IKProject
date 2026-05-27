@@ -1,7 +1,7 @@
 extends Node
 
 # Camera signals
-signal on_camera_motion(rotation_vector : Vector3)
+#signal on_camera_motion(rotation_vector : Vector3)
 signal on_fov_change(fov : float)
 signal on_camera_change(fov: float, arm_length : float)
 

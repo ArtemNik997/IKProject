@@ -36,5 +36,5 @@ func on_exit_state():
 
 func on_animation_finished(animation_name: String):
 	if animation_name == animation_node:
-		print(animation_name)
+		#print(animation_name)
 		is_jumped = true

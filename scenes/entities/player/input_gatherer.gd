@@ -3,16 +3,10 @@ class_name InputGatherer
 
 var rotation_vector : Vector3 = Vector3.ZERO
 
-#@onready var camera_controller : CameraController = $"../CameraController"
-
-func _ready() -> void:
-	PlayerEvents.on_camera_motion.connect(rotate_input_direction)
-
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
 	new_input.player_input = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	new_input.input_direction = new_input.player_input.rotated(-PlayerGlobals.player_camera_rotation.y)
-	#.rotated(-camera_controller.rotation.y)
 	
 	if Input.is_action_pressed("crouch"):
 		new_input.actions.append("crouch")
@@ -23,31 +17,29 @@ func gather_input() -> InputPackage:
 			new_input.actions.append("shoot")
 		if Input.is_action_just_pressed("reload"):
 			new_input.actions.append("reload")
-
-	#if Input.is_action_just_pressed("move_jump"):
-		#new_input.actions.append("jump_run")
 	
 	if new_input.input_direction != Vector2.ZERO:
 		new_input.actions.append("stand")
+		if PlayerGlobals.player_can_hopup and new_input.player_input.y > 0:
+			new_input.actions.append("hopup")
 		if Input.is_action_pressed("sprint"):
 			new_input.actions.append("sprint")
 			if Input.is_action_just_pressed("jump"):
-				if PlayerGlobals.player_can_hopup:
-					new_input.actions.append("hopup")
-				else:
-					new_input.actions.append("jumpsprint")
+				new_input.actions.append("jumpsprint")
 	
 	if Input.is_action_just_pressed("jump"):
-		if PlayerGlobals.player_can_hopup:
-			new_input.actions.append("hopup")
-		else:
-			new_input.actions.append("jumpstand")
+		new_input.actions.append("jumpstand")
 	
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")
-		
 	
 	return new_input
 
 func rotate_input_direction(rotation_vector: Vector3):
 	rotation_vector = rotation_vector
+
+#@onready var camera_controller : CameraController = $"../CameraController"
+
+func _ready() -> void:
+	#PlayerEvents.on_camera_motion.connect(rotate_input_direction)
+	pass

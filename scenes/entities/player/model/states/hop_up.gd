@@ -4,20 +4,25 @@ class_name HopUp
 const SPEED : float = 0.0
 
 var is_climbed : bool = false
+var target_rotation_y : float = 0.0
+var has_set_direction : bool = false
+
+@export var rotation_blend_speed : float = 12.0
 
 func on_enter_state():
-	playback.travel(animation_node)
+	playback.start(animation_node)
 	is_climbed = false
 
 func update(input : InputPackage, delta : float):
-	# Получаем вектор скорости из анимации
-	#var root_vel = velocity_calculator.get_root_motion_velocity(delta)
-	#
-	## Применяем root motion к velocity
-	#player.velocity.x = root_vel.x
-	#player.velocity.z = root_vel.z
-	## Y-компонент берём из анимации (персонаж сам "подтягивается" над уступом)
-	#player.velocity.y = root_vel.y
+	if not has_set_direction:
+		var dir2d = input.input_direction
+		if dir2d != Vector2.ZERO:
+			# Преобразуем 2D направление камеры в угол поворота Y
+			target_rotation_y = atan2(dir2d.x, dir2d.y)
+		else:
+			target_rotation_y = player.rotation.y
+		has_set_direction = true
+	
 	player.velocity = velocity_calculator.get_root_motion_velocity(delta)
 	
 	player.move_and_slide()

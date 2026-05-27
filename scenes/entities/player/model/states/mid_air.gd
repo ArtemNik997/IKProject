@@ -10,6 +10,7 @@ var landing_animation_node : String = "Jump_Land_Fast"
 
 
 func on_enter_state():
+	print("Entered MidAir")
 	playback.start(animation_node)
 
 func update(input : InputPackage, delta : float):
@@ -26,7 +27,9 @@ func update(input : InputPackage, delta : float):
 
 func check_relevance(input : InputPackage) -> String:
 	input.actions.sort_custom(state_priority_sort)
+	if PlayerGlobals.player_can_hopup and input.input_direction != Vector2.ZERO:
+		return "hopup"
 	if PlayerGlobals.player_is_on_floor:
 		#print("landed")
-		return "landingfast"
+		return input.actions[0]
 	return self.name
