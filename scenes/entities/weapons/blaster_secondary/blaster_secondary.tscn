@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://da3iawvx35ysk"]
+
+[ext_resource type="Script" uid="uid://btxm4mhue3qgp" path="res://scenes/entities/weapons/blaster_secondary/blaster_secondary.gd" id="1_vt4x1"]
+[ext_resource type="PackedScene" uid="uid://drkl5r2wbr0bu" path="res://graphics/weapons/GLB format/blaster-m.glb" id="2_nrl2a"]
+
+[node name="BlasterSecondary" type="Node3D" unique_id=201046793 node_paths=PackedStringArray("weapon_skin")]
+transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000018, 0, 0, 0)
+script = ExtResource("1_vt4x1")
+weapon_skin = NodePath("blaster-m2")
+
+[node name="blaster-m2" parent="." unique_id=2089213623 instance=ExtResource("2_nrl2a")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="SecondaryRHTarget" type="Marker3D" parent="." unique_id=744261825]
+transform = Transform3D(1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000005, 0, -0.08483263, -0.16834131)
+
+[node name="SecondaryLHTarget" type="Marker3D" parent="." unique_id=66105646]
+transform = Transform3D(0.9999994, 0, 0, 0, 1.0000002, 0, 0, 0, 0.99999857, 0, -0.10182045, 0.1213313)

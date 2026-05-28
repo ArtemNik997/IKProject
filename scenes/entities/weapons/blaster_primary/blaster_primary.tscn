@@ -11,8 +11,8 @@ weapon_skin = NodePath("Visuals")
 [node name="Visuals" parent="." unique_id=395096375 instance=ExtResource("2_jo263")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="RightHandTarget" type="Marker3D" parent="Visuals" unique_id=744261825]
-transform = Transform3D(0.61996055, 0.37595832, -0.68869853, 0.65508723, 0.23510194, 0.7180451, 0.43186852, -0.89631623, -0.1005317, 0.049110252, -0.11131949, 0.38997966)
+[node name="PrimaryRHTarget" type="Marker3D" parent="." unique_id=744261825]
+transform = Transform3D(-1.0000004, 0, -8.7422805e-08, 0, 1.0000001, 0, 8.742279e-08, 0, -1.0000005, 1.7763524e-15, -0.03953946, -0.12015717)
 
-[node name="LeftHandTarget" type="Marker3D" parent="Visuals" unique_id=66105646]
-transform = Transform3D(0.03582177, 0.83443284, -0.54994375, 0.9984953, -0.052740216, -0.014982355, -0.041505802, -0.5485807, -0.8350657, -0.08987572, -0.10755629, 0.104063615)
+[node name="PrimaryLHTarget" type="Marker3D" parent="." unique_id=66105646]
+transform = Transform3D(-0.9999994, 0, -8.742265e-08, 0, 1.0000002, 0, 8.742273e-08, 0, -0.9999987, 0, -0.047979493, 0.18674651)

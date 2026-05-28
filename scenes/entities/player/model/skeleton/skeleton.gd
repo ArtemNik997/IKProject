@@ -17,16 +17,13 @@ var idle_head_offset : Vector3 = Vector3.ZERO
 
 func _ready() -> void:
 	aim_ik_stop()
-	#spine3_look_at_modifier.active = false
 	PlayerEvents.on_aim_start.connect(aim_ik_start)
 	PlayerEvents.on_aim_stop.connect(aim_ik_stop)
 
 func _process(delta: float) -> void:
 	handle_body_rotation(delta)
-	#print("Skeleton")
 
 func aim_ik_start():
-	#head_copy_transform_modifier.active = false
 	is_aiming = true
 	spine_ik.active = true
 	spine3_copy_transform_modifier.active = true
@@ -36,7 +33,6 @@ func aim_ik_start():
 	
 
 func aim_ik_stop():
-	#head_copy_transform_modifier.active = true
 	is_aiming = false
 	spine_ik.active = false
 	spine3_copy_transform_modifier.active = false
@@ -44,14 +40,7 @@ func aim_ik_stop():
 	left_hand_two_bone.active = false
 	hands_rotation.active = false
 
-func handle_body_rotation(delta: float) -> void:
-	#var cur_rotation_speed = idle_rotation_speed
-	#
-	#if is_aiming:
-		#cur_rotation_speed = aim_rotation_speed
-	#else:
-		#cur_rotation_speed = idle_rotation_speed
-	
+func handle_body_rotation(delta: float) -> void:	
 	if not camera_controller:
 		return
 
