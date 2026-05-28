@@ -22,11 +22,6 @@ PlayerGlobals="*uid://bcyh6v0vilcm1"
 GameEvents="*uid://do23uei1qvx03"
 GameGlobals="*uid://cg7wdh53foopr"
 
-[display]
-
-window/size/viewport_width=1280
-window/size/viewport_height=720
-
 [filesystem]
 
 import/blender/enabled=false

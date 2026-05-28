@@ -6,10 +6,10 @@ class_name PlayerSkeleton
 @export var aim_rotation_speed : float = 15.0
 @onready var spine_ik : CCDIK3D = $SpineCCDIK3D
 @onready var spine3_copy_transform_modifier : CopyTransformModifier3D = $Spine3CopyTransformModifier3D
-#@onready var spine3_look_at_modifier : LookAtModifier3D = $Spine3LookAtModifier3D2
+#@onready var head_copy_transform_modifier : CopyTransformModifier3D = $HeadCopyTransformModifier3D
 @onready var right_hand_two_bone : TwoBoneIK3D = $RightHandBoneIK3D
 @onready var left_hand_two_bone : TwoBoneIK3D = $LeftHandBoneIK3D
-@onready var hands_rotation : CopyTransformModifier3D = $HandsRotation
+@onready var hands_rotation : CopyTransformModifier3D = $HandsCopyTransformModifier3D
 
 var is_rotating : bool = false
 var is_aiming : bool = false
@@ -26,6 +26,7 @@ func _process(delta: float) -> void:
 	#print("Skeleton")
 
 func aim_ik_start():
+	#head_copy_transform_modifier.active = false
 	is_aiming = true
 	spine_ik.active = true
 	spine3_copy_transform_modifier.active = true
@@ -35,6 +36,7 @@ func aim_ik_start():
 	
 
 func aim_ik_stop():
+	#head_copy_transform_modifier.active = true
 	is_aiming = false
 	spine_ik.active = false
 	spine3_copy_transform_modifier.active = false
