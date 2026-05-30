@@ -11,19 +11,28 @@ class_name Weapon
 var target_pos : Vector3 = Vector3.ZERO
 var target_rot : Quaternion = Quaternion.IDENTITY
 var weapon_visible: bool = false
+var is_active : bool = false
 
 @onready var default_pos : Vector3 = self.transform.origin
 @onready var default_rot : Quaternion = self.transform.basis.get_rotation_quaternion()
+@onready var rh_target : Marker3D = $RHTarget
+@onready var lh_target : Marker3D = $LHTarget
 #@onready var animation_player : AnimationPlayer = $AnimationPlayer
 
 func _ready() -> void:
+	weapon_skin.visible = weapon_visible
 	PlayerEvents.on_player_shot.connect(apply_recoil)
 	#PlayerEvents.on_player_shot.connect(play_shoot_animation)
 	PlayerEvents.on_aim_start.connect(set_weapon_visible)
 	PlayerEvents.on_aim_stop.connect(set_weapon_invisible)
 
 func _physics_process(delta: float) -> void:
-	weapon_skin.visible = weapon_visible
+	#if not is_active:
+		#weapon_skin.visible = false
+		#weapon_visible = false
+		#return
+	
+	weapon_skin.visible = weapon_visible and is_active
 	
 	target_pos = target_pos.lerp(default_pos, return_speed * delta)
 	target_rot = target_rot.slerp(default_rot, return_speed * delta)

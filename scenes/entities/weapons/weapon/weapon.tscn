@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dbc4c0kprlfw1"]
 
-[ext_resource type="Script" uid="uid://duaw2m4cg8yne" path="res://scenes/entities/weapons/weapon_example/weapon.gd" id="1_7csn7"]
+[ext_resource type="Script" uid="uid://duaw2m4cg8yne" path="res://scenes/entities/weapons/weapon/weapon.gd" id="1_7csn7"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_shhgo"]
 size = Vector3(0.05, 0.1, 0.6)
@@ -13,8 +13,8 @@ script = ExtResource("1_7csn7")
 transform = Transform3D(1.0000005, 0, 0, 0, 1.0000006, 0, 0, 0, 1.0000005, 0, 0, 0)
 mesh = SubResource("BoxMesh_shhgo")
 
-[node name="RightHandTarget" type="Marker3D" parent="WeaponMesh" unique_id=744261825]
-transform = Transform3D(-0.6199603, -0.37595806, 0.68869823, 0.6550868, 0.23510179, 0.7180447, -0.43186826, 0.8963159, 0.100531586, -0.049110264, -0.11131942, -0.38997945)
+[node name="RHTarget" type="Marker3D" parent="." unique_id=744261825]
+transform = Transform3D(-0.6199606, -0.37595823, 0.68869853, 0.65508723, 0.23510194, 0.7180451, -0.43186846, 0.8963163, 0.10053164, -0.049110286, -0.11131949, -0.38997966)
 
-[node name="LeftHandTarget" type="Marker3D" parent="WeaponMesh" unique_id=66105646]
-transform = Transform3D(-0.035821747, -0.83443236, 0.54994357, 0.9984947, -0.052740186, -0.014982346, 0.041505788, 0.54858047, 0.83506525, 0.08987567, -0.107556224, -0.10406357)
+[node name="LHTarget" type="Marker3D" parent="." unique_id=66105646]
+transform = Transform3D(-0.035821766, -0.8344328, 0.5499438, 0.9984953, -0.052740216, -0.014982355, 0.041505806, 0.54858077, 0.83506566, 0.08987571, -0.10755629, -0.10406362)

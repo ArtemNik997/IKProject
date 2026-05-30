@@ -10,3 +10,5 @@ var player_is_on_floor : bool
 var player_near_wall : bool
 var player_can_climb : bool
 var player_can_hopup : bool
+
+var player_current_weapon : Weapon

@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://dx3reetpufgiu"]
+
+[ext_resource type="Script" uid="uid://c1n7mqg3gmf3c" path="res://scenes/entities/weapons/blaster_tertiary/blaster_tertiary.gd" id="1_ykjy8"]
+[ext_resource type="PackedScene" uid="uid://bapl12goetidr" path="res://graphics/weapons/GLB format/blaster-h.glb" id="2_od4ab"]
+
+[node name="BlasterTertiary" type="Node3D" unique_id=201046793]
+transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000018, 0, 0, 0)
+script = ExtResource("1_ykjy8")
+
+[node name="blaster-h2" parent="." unique_id=1065904067 instance=ExtResource("2_od4ab")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="RHTarget" type="Marker3D" parent="." unique_id=744261825]
+transform = Transform3D(1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000005, 0, -0.08483263, -0.16834131)
+
+[node name="LHTarget" type="Marker3D" parent="." unique_id=66105646]
+transform = Transform3D(0.9999994, 0, 0, 0, 1.0000002, 0, 0, 0, 0.99999857, 0, -0.10182045, 0.1213313)

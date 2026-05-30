@@ -17,3 +17,5 @@ signal on_aim_start()
 signal on_aim_stop()
 
 signal on_player_shot()
+
+signal on_weapon_switch(weapon_slot: String)

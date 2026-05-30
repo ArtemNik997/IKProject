@@ -11,8 +11,8 @@ weapon_skin = NodePath("blaster-m2")
 [node name="blaster-m2" parent="." unique_id=2089213623 instance=ExtResource("2_nrl2a")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
-[node name="SecondaryRHTarget" type="Marker3D" parent="." unique_id=744261825]
+[node name="RHTarget" type="Marker3D" parent="." unique_id=744261825]
 transform = Transform3D(1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000005, 0, -0.08483263, -0.16834131)
 
-[node name="SecondaryLHTarget" type="Marker3D" parent="." unique_id=66105646]
+[node name="LHTarget" type="Marker3D" parent="." unique_id=66105646]
 transform = Transform3D(0.9999994, 0, 0, 0, 1.0000002, 0, 0, 0, 0.99999857, 0, -0.10182045, 0.1213313)

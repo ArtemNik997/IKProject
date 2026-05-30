@@ -22,6 +22,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	handle_body_rotation(delta)
+	update_hands_ik_targets()
 
 func aim_ik_start():
 	is_aiming = true
@@ -57,6 +58,19 @@ func handle_body_rotation(delta: float) -> void:
 		
 		if abs(angle_difference(global_rotation.y, camera_rot)) < deg_to_rad(2.0):
 			is_rotating = false
+
+func update_hands_ik_targets():
+	if PlayerGlobals.player_current_weapon:
+		var rh_path = PlayerGlobals.player_current_weapon.rh_target.get_path()
+		var lh_path = PlayerGlobals.player_current_weapon.lh_target.get_path()
+		
+		hands_rotation.set("settings/0/reference_node", rh_path)
+		hands_rotation.set("settings/1/reference_node", lh_path)
+		right_hand_two_bone.set("settings/0/target_node", rh_path)
+		left_hand_two_bone.set("settings/0/target_node", lh_path)
+	else:
+		push_error("PlayerGlobals.player_current_weapon is null")
+	pass
 
 func accept_target_node(target_node: Marker3D):
 	var path = spine_ik.get_path_to(target_node)

@@ -35,6 +35,7 @@ func _ready() -> void:
 	animation_tree.active = true
 	current_state = states["stand"]
 	camera_controller.character_body = player
+	PlayerEvents.on_weapon_switch.emit("primary")
 	
 	for state in states.values():
 		state.player = player

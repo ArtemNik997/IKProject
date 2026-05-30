@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://dri7h0qk3xv4l"]
+
+[ext_resource type="Script" uid="uid://clob0qlskfrl4" path="res://scenes/entities/weapons/blaster_dual/dual_blasters.gd" id="1_8wn5m"]
+[ext_resource type="PackedScene" uid="uid://20xf4u5v7fv4" path="res://graphics/weapons/GLB format/blaster-b.glb" id="1_safln"]
+[ext_resource type="PackedScene" uid="uid://dtc3pbth3fo3f" path="res://graphics/weapons/GLB format/blaster-c.glb" id="2_sqxlc"]
+
+[sub_resource type="Animation" id="Animation_8wn5m"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/RHPivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-0.15430962]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/LHPivot:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [-0.0931452]
+}
+
+[sub_resource type="Animation" id="Animation_neumv"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/RHPivot:rotation:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.6143559, -0.15430962]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/LHPivot:rotation:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [-0.0931452, -0.3700098, -0.0931452]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_px2c4"]
+_data = {
+&"RESET": SubResource("Animation_8wn5m"),
+&"shoot": SubResource("Animation_neumv")
+}
+
+[node name="DualBlasters" type="Node3D" unique_id=2004960771 node_paths=PackedStringArray("weapon_skin")]
+transform = Transform3D(0.6810586, -0.2527632, 0.6872231, -0.09820992, 0.8985208, 0.42780858, -0.7256174, -0.35885376, 0.58711946, 0, 0, 0)
+script = ExtResource("1_8wn5m")
+weapon_skin = NodePath(".")
+
+[node name="Pivot" type="Node3D" parent="." unique_id=1559776192]
+
+[node name="RHPivot" type="Node3D" parent="Pivot" unique_id=1440744750]
+transform = Transform3D(0.96013457, 0.23938535, 0.14434715, -0.26073763, 0.95309615, 0.15369785, -0.100783795, -0.18520744, 0.977517, -0.0024380982, -0.032096148, -0.44646725)
+
+[node name="blaster-b2" parent="Pivot/RHPivot" unique_id=377804749 instance=ExtResource("1_safln")]
+transform = Transform3D(-0.9884169, -0.15170966, 0.004001215, -0.15171765, 0.98842174, -0.0017821267, -0.003684722, -0.002368562, -0.9999903, 0, -1.1920929e-07, 0.39999998)
+
+[node name="RHTarget" type="Marker3D" parent="Pivot/RHPivot/blaster-b2" unique_id=2107593553]
+transform = Transform3D(0.9999732, -0.0071282983, 0.0017796215, -0.0023429003, -0.07983579, 0.99680614, -0.006963268, -0.9967828, -0.07985022, 0.043312013, -0.09752095, 0.15548757)
+
+[node name="LHPivot" type="Node3D" parent="Pivot" unique_id=1899556424]
+transform = Transform3D(0.68872064, -0.70884424, 0.15232262, 0.70404077, 0.7040412, 0.09301054, -0.17317134, 0.043183103, 0.98394424, 0.38621855, 0.14716744, -0.111760736)
+
+[node name="blaster-c2" parent="Pivot/LHPivot" unique_id=1234978689 instance=ExtResource("2_sqxlc")]
+transform = Transform3D(-0.99999994, -2.3283064e-09, -8.754432e-08, -4.656613e-10, 0.99999994, 0, 8.940697e-08, 1.4901161e-08, -0.99999994, 0, 0, 0.4)
+
+[node name="LHTarget" type="Marker3D" parent="Pivot/LHPivot/blaster-c2" unique_id=201528385]
+transform = Transform3D(0.96374387, -0.21986642, 0.15117893, -0.14367205, 0.04983683, 0.9883691, -0.2248432, -0.97425675, 0.016441315, -0.03769055, -0.050424352, 0.24123776)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=367610352]
+libraries/ = SubResource("AnimationLibrary_px2c4")

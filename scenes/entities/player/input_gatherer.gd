@@ -30,6 +30,16 @@ func gather_input() -> InputPackage:
 	if Input.is_action_just_pressed("jump"):
 		new_input.actions.append("jumpstand")
 	
+	if Input.is_action_just_pressed("get_primary_weapon"):
+		PlayerEvents.on_weapon_switch.emit("primary")
+	
+	if Input.is_action_just_pressed("get_secondary_weapon"):
+		PlayerEvents.on_weapon_switch.emit("secondary")
+	
+	if Input.is_action_just_pressed("get_tertiary_weapon"):
+		PlayerEvents.on_weapon_switch.emit("tertiary")
+		#PlayerGlobals.player_current_weapon = PlayerGlobals.player_weapons["secondary"]
+	
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")
 	
