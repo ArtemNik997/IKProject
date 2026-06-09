@@ -1,17 +1,74 @@
 [gd_scene format=3 uid="uid://dx3reetpufgiu"]
 
 [ext_resource type="Script" uid="uid://c1n7mqg3gmf3c" path="res://scenes/entities/weapons/blaster_tertiary/blaster_tertiary.gd" id="1_ykjy8"]
+[ext_resource type="PackedScene" uid="uid://b3rloeo6003j4" path="res://scenes/entities/projectiles/projectile.tscn" id="2_ldlpv"]
 [ext_resource type="PackedScene" uid="uid://bapl12goetidr" path="res://graphics/weapons/GLB format/blaster-h.glb" id="2_od4ab"]
+[ext_resource type="AudioStream" uid="uid://c0qh7ugh34sr1" path="res://graphics/weapons/audio/laser3.ogg" id="3_od4ab"]
 
-[node name="BlasterTertiary" type="Node3D" unique_id=201046793]
-transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000018, 0, 0, 0)
+[sub_resource type="Animation" id="Animation_0src8"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Laser3")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_projectile"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ldlpv"]
+_data = {
+&"shoot": SubResource("Animation_0src8")
+}
+
+[node name="BlasterTertiary" type="Node3D" unique_id=1304809927 node_paths=PackedStringArray("rh_target", "lh_target", "weapon_skin")]
+transform = Transform3D(1.0000026, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000018, 0, 0, 0)
 script = ExtResource("1_ykjy8")
+projectile = ExtResource("2_ldlpv")
+rh_target = NodePath("Pivot/RHTarget")
+lh_target = NodePath("Pivot/LHTarget")
+weapon_skin = NodePath("Pivot")
 
-[node name="blaster-h2" parent="." unique_id=1065904067 instance=ExtResource("2_od4ab")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="Pivot" type="Node3D" parent="." unique_id=50621335]
+transform = Transform3D(0.50984216, -0.49592888, 0.70293343, -0.09699952, 0.77875865, 0.619779, -0.85478187, -0.3841737, 0.34893915, 0.336, 0.289, 0.363)
 
-[node name="RHTarget" type="Marker3D" parent="." unique_id=744261825]
-transform = Transform3D(1.0000004, 0, 0, 0, 1.0000001, 0, 0, 0, 1.0000005, 0, -0.08483263, -0.16834131)
+[node name="blaster-h2" parent="Pivot" unique_id=1869661122 instance=ExtResource("2_od4ab")]
+transform = Transform3D(-1, -1.4901161e-08, -1.1920929e-07, 7.450581e-09, 0.9999999, 2.9802322e-08, 8.940697e-08, -2.9802322e-08, -1, 0, 0, 0)
 
-[node name="LHTarget" type="Marker3D" parent="." unique_id=66105646]
-transform = Transform3D(0.9999994, 0, 0, 0, 1.0000002, 0, 0, 0, 0.99999857, 0, -0.10182045, 0.1213313)
+[node name="RHTarget" type="Marker3D" parent="Pivot" unique_id=1592704704]
+transform = Transform3D(-0.979457, 0.2016548, 0.0003825426, -0.004337013, -0.02296184, 0.9997275, 0.20160851, 0.9791876, 0.023364663, -0.06743273, -0.06084299, -0.265966)
+
+[node name="LHTarget" type="Marker3D" parent="Pivot" unique_id=931676302]
+transform = Transform3D(-0.18518852, -0.98225474, -0.029685587, -0.969872, 0.18755284, -0.15546969, 0.15827864, 0, -0.98739314, 0.102293104, 0.08368564, -0.21834785)
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=93564395]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5038053, 0.46423617, 0.44602114)
+
+[node name="Audio" type="Node3D" parent="." unique_id=757768704]
+
+[node name="Laser3" type="AudioStreamPlayer" parent="Audio" unique_id=82019811]
+stream = ExtResource("3_od4ab")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=512647323]
+libraries/ = SubResource("AnimationLibrary_ldlpv")

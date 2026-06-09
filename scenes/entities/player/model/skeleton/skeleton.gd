@@ -6,7 +6,6 @@ class_name PlayerSkeleton
 @export var aim_rotation_speed : float = 15.0
 @onready var spine_ik : CCDIK3D = $SpineCCDIK3D
 @onready var spine3_copy_transform_modifier : CopyTransformModifier3D = $Spine3CopyTransformModifier3D
-#@onready var head_copy_transform_modifier : CopyTransformModifier3D = $HeadCopyTransformModifier3D
 @onready var right_hand_two_bone : TwoBoneIK3D = $RightHandBoneIK3D
 @onready var left_hand_two_bone : TwoBoneIK3D = $LeftHandBoneIK3D
 @onready var hands_rotation : CopyTransformModifier3D = $HandsCopyTransformModifier3D
@@ -21,8 +20,10 @@ func _ready() -> void:
 	PlayerEvents.on_aim_stop.connect(aim_ik_stop)
 
 func _process(delta: float) -> void:
-	handle_body_rotation(delta)
 	update_hands_ik_targets()
+
+func _physics_process(delta: float) -> void:
+	handle_body_rotation(delta)
 
 func aim_ik_start():
 	is_aiming = true

@@ -1,18 +1,74 @@
 [gd_scene format=3 uid="uid://by7rloj2kd8b8"]
 
 [ext_resource type="Script" uid="uid://c5hyviar76fu" path="res://scenes/entities/weapons/blaster_primary/blaster_primary.gd" id="1_jo263"]
+[ext_resource type="PackedScene" uid="uid://b3rloeo6003j4" path="res://scenes/entities/projectiles/projectile.tscn" id="2_0src8"]
 [ext_resource type="PackedScene" uid="uid://dimmd47kh484u" path="res://graphics/weapons/GLB format/blaster-d.glb" id="2_jo263"]
+[ext_resource type="AudioStream" uid="uid://c0qh7ugh34sr1" path="res://graphics/weapons/audio/laser3.ogg" id="3_b7uum"]
 
-[node name="BlasterPrimary" type="Node3D" unique_id=201046793 node_paths=PackedStringArray("weapon_skin")]
-transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000018, 0, 0, 0)
+[sub_resource type="Animation" id="Animation_0src8"]
+resource_name = "shoot"
+length = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Audio/Laser3")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shoot_projectile"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_acjw1"]
+_data = {
+&"shoot": SubResource("Animation_0src8")
+}
+
+[node name="BlasterPrimary" type="Node3D" unique_id=1839114410 node_paths=PackedStringArray("rh_target", "lh_target", "weapon_skin")]
+transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000017, 0, 0, 0)
 script = ExtResource("1_jo263")
-weapon_skin = NodePath("Visuals")
+projectile = ExtResource("2_0src8")
+rh_target = NodePath("Pivot/RHTarget")
+lh_target = NodePath("Pivot/LHTarget")
+weapon_skin = NodePath("Pivot")
 
-[node name="Visuals" parent="." unique_id=395096375 instance=ExtResource("2_jo263")]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+[node name="Pivot" type="Node3D" parent="." unique_id=491634700]
+transform = Transform3D(0.48587635, -0.24131426, 0.8400545, -0.1527823, 0.92288303, 0.35347486, -0.86057055, -0.30009055, 0.4115385, 0.224, 0.263, 0.263)
 
-[node name="RHTarget" type="Marker3D" parent="." unique_id=744261825]
-transform = Transform3D(-1.0000004, 0, -8.7422805e-08, 0, 1.0000001, 0, 8.742279e-08, 0, -1.0000005, 1.7763524e-15, -0.03953946, -0.12015717)
+[node name="Visuals" parent="Pivot" unique_id=1663711828 instance=ExtResource("2_jo263")]
+transform = Transform3D(-0.99999994, 0, -1.1920929e-07, 3.7252903e-09, 0.9999999, 0, 5.9604645e-08, 7.450581e-09, -0.9999999, 0, 0, 0)
 
-[node name="LHTarget" type="Marker3D" parent="." unique_id=66105646]
-transform = Transform3D(-0.9999994, 0, -8.742265e-08, 0, 1.0000002, 0, 8.742273e-08, 0, -0.9999987, 0, -0.047979493, 0.18674651)
+[node name="RHTarget" type="Marker3D" parent="Pivot" unique_id=603804501]
+transform = Transform3D(-1.0000004, 1.1920929e-07, 0, 0, -0.010698631, 0.99994314, 2.9802322e-08, 0.9999427, 0.010698639, -0.040823013, -0.033220172, -0.21375713)
+
+[node name="LHTarget" type="Marker3D" parent="Pivot" unique_id=660755354]
+transform = Transform3D(-0.05855693, -0.78271496, 0.61961925, 0.9969222, -0.013443366, 0.07723184, -0.05212076, 0.62223595, 0.7810923, 0.09491953, -0.06482768, 0.123294234)
+
+[node name="Muzzle" type="Marker3D" parent="." unique_id=952233608]
+transform = Transform3D(1, 5.9604645e-08, -1.1920929e-07, 0, 0.9999997, 1.4901161e-08, 0, 5.9604645e-08, 0.9999999, 0.533106, 0.44271436, 0.40669882)
+
+[node name="Audio" type="Node3D" parent="." unique_id=140414741]
+
+[node name="Laser3" type="AudioStreamPlayer" parent="Audio" unique_id=162694552]
+stream = ExtResource("3_b7uum")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=102152413]
+libraries/ = SubResource("AnimationLibrary_acjw1")

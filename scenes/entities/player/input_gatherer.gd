@@ -38,7 +38,9 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_just_pressed("get_tertiary_weapon"):
 		PlayerEvents.on_weapon_switch.emit("tertiary")
-		#PlayerGlobals.player_current_weapon = PlayerGlobals.player_weapons["secondary"]
+	
+	if Input.is_action_just_pressed("get_dual_blasters"):
+		PlayerEvents.on_weapon_switch.emit("dual")
 	
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")
