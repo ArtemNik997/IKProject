@@ -36,7 +36,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_neumv"]
 resource_name = "shoot"
-length = 0.1
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,7 +44,7 @@ tracks/0/path = NodePath("Pivot/RHPivot:rotation:x")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667),
+"times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [-0.6143559, -0.15430962]
@@ -56,7 +56,7 @@ tracks/1/path = NodePath("Pivot/LHPivot:rotation:x")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.033333335, 0.1),
+"times": PackedFloat32Array(0, 0.13333334, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [-0.0931452, -0.3700098, -0.0931452]
@@ -82,7 +82,7 @@ tracks/3/path = NodePath("Audio/Laser2")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.033333335),
+"times": PackedFloat32Array(0.13333334),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [0.0],
@@ -96,7 +96,7 @@ tracks/4/path = NodePath(".")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.033333335),
+"times": PackedFloat32Array(0, 0.13333334),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -124,7 +124,7 @@ weapon_skin = NodePath(".")
 [node name="Pivot" type="Node3D" parent="." unique_id=1559776192]
 
 [node name="RHPivot" type="Node3D" parent="Pivot" unique_id=1440744750]
-transform = Transform3D(0.96013445, 0.23938529, 0.14434715, -0.26073757, 0.95309603, 0.15369785, -0.100783795, -0.18520743, 0.977517, -0.0024380982, -0.032096148, -0.44646725)
+transform = Transform3D(0.9601344, 0.23938528, 0.14434715, -0.26073757, 0.953096, 0.15369785, -0.10078379, -0.18520741, 0.977517, -0.0024380982, -0.032096148, -0.44646725)
 
 [node name="blaster-b2" parent="Pivot/RHPivot" unique_id=377804749 instance=ExtResource("1_safln")]
 transform = Transform3D(-0.9884169, -0.15170966, 0.004001215, -0.15171765, 0.98842174, -0.0017821267, -0.003684722, -0.002368562, -0.9999903, 0, -1.1920929e-07, 0.39999998)
@@ -145,7 +145,7 @@ transform = Transform3D(-0.99999994, -2.3283064e-09, -8.754432e-08, -4.656613e-1
 transform = Transform3D(0.96374387, -0.21986642, 0.15117893, -0.14367205, 0.04983683, 0.9883691, -0.2248432, -0.97425675, 0.016441315, -0.03769055, -0.050424352, 0.24123776)
 
 [node name="MarkerL" type="Marker3D" parent="Pivot" unique_id=1396755105]
-transform = Transform3D(0.9999999, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0.07547399, 0.33005658, 0.056845658)
+transform = Transform3D(0.9999999, 0, 2.9802322e-08, 0, 1, 0, -2.9802322e-08, 0, 1, 0.080929324, 0.07221599, 0.13985676)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=367610352]
 libraries/ = SubResource("AnimationLibrary_px2c4")
