@@ -4,6 +4,11 @@ class_name PlayerSkeleton
 @export var camera_controller : CameraController
 @export var idle_rotation_speed : float = 5.0
 @export var aim_rotation_speed : float = 15.0
+
+# Скорость плавного переключения влияния. 
+# 15.0 - это быстро, но с заметной плавной интерполяцией.
+@export var aim_transition_speed : float = 15.0
+
 @onready var spine_ik : CCDIK3D = $SpineCCDIK3D
 @onready var spine3_copy_transform_modifier : CopyTransformModifier3D = $Spine3CopyTransformModifier3D
 @onready var right_hand_two_bone : TwoBoneIK3D = $RightHandBoneIK3D
@@ -14,33 +19,69 @@ var is_rotating : bool = false
 var is_aiming : bool = false
 var idle_head_offset : Vector3 = Vector3.ZERO
 
+# Массив для удобного управления всеми модификаторами прицеливания
+var aim_modifiers : Array[Node] = []
+
+# Переменные для плавного перехода
+var target_aim_influence : float = 0.0
+var current_aim_influence : float = 0.0
+
 func _ready() -> void:
-	aim_ik_stop()
+	# Собираем все модификаторы в массив
+	aim_modifiers = [
+		spine_ik, 
+		spine3_copy_transform_modifier, 
+		right_hand_two_bone, 
+		left_hand_two_bone, 
+		hands_rotation
+	]
+	
+	# Инициализация: гарантируем, что все выключено при старте
+	current_aim_influence = 0.0
+	target_aim_influence = 0.0
+	_update_modifiers_state(0.0)
+	
 	PlayerEvents.on_aim_start.connect(aim_ik_start)
 	PlayerEvents.on_aim_stop.connect(aim_ik_stop)
 
 func _process(delta: float) -> void:
 	update_hands_ik_targets()
+	_smooth_aim_ik_transition(delta)
 
 func _physics_process(delta: float) -> void:
 	handle_body_rotation(delta)
 
+# Теперь эти функции просто меняют ЦЕЛЬ, а не переключают состояние мгновенно
 func aim_ik_start():
 	is_aiming = true
-	spine_ik.active = true
-	spine3_copy_transform_modifier.active = true
-	right_hand_two_bone.active = true
-	left_hand_two_bone.active = true
-	hands_rotation.active = true
-	
+	target_aim_influence = 1.0
 
 func aim_ik_stop():
 	is_aiming = false
-	spine_ik.active = false
-	spine3_copy_transform_modifier.active = false
-	right_hand_two_bone.active = false
-	left_hand_two_bone.active = false
-	hands_rotation.active = false
+	target_aim_influence = 0.0
+
+# Функция плавного перехода и умного переключения active
+func _smooth_aim_ik_transition(delta: float) -> void:
+	# Плавно приближаем текущее влияние к целевому
+	current_aim_influence = lerp(current_aim_influence, target_aim_influence, aim_transition_speed * delta)
+	
+	# Небольшой порог, чтобы избежать бесконечных микро-вычислений и дрожания
+	var epsilon : float = 0.01
+	
+	_update_modifiers_state(current_aim_influence, epsilon)
+
+# Применяем состояние к модификаторам
+func _update_modifiers_state(influence_value: float, epsilon: float = 0.01) -> void:
+	for mod in aim_modifiers:
+		if mod == null:
+			continue
+			
+		if influence_value < epsilon:
+			mod.active = false
+			mod.influence = 0.0
+		else:
+			mod.active = true
+			mod.influence = influence_value
 
 func handle_body_rotation(delta: float) -> void:	
 	if not camera_controller:
@@ -70,8 +111,7 @@ func update_hands_ik_targets():
 		right_hand_two_bone.set("settings/0/target_node", rh_path)
 		left_hand_two_bone.set("settings/0/target_node", lh_path)
 	else:
-		push_error("PlayerGlobals.player_current_weapon is null")
-	pass
+		push_warning("PlayerGlobals.player_current_weapon is null")
 
 func accept_target_node(target_node: Marker3D):
 	var path = spine_ik.get_path_to(target_node)

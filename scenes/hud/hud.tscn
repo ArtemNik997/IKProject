@@ -1,19 +1,44 @@
 [gd_scene format=3 uid="uid://mfpxyowqi3o3"]
 
 [ext_resource type="Script" uid="uid://c3r5yc51heu1u" path="res://scenes/hud/hud.gd" id="1_48c2t"]
+[ext_resource type="Texture2D" uid="uid://ccr1upu6ms2bh" path="res://graphics/ui/crosshair/crosshair007.png" id="2_cgeww"]
 
 [node name="HUD" type="Control" unique_id=2078074000]
-custom_minimum_size = Vector2(1152, 648)
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_48c2t")
 
 [node name="PlayerVars" type="TextEdit" parent="." unique_id=1869562572]
+visible = false
 layout_mode = 0
 offset_right = 180.0
 offset_bottom = 187.0
 theme_override_colors/caret_background_color = Color(0, 0, 0, 0)
 theme_override_colors/background_color = Color(0, 0, 0, 0)
 text = "CanClimb:"
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=715539800]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -64.0
+offset_right = 64.0
+offset_bottom = 64.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.3, 0.3)
+pivot_offset = Vector2(64, 64)
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer" unique_id=1694408380]
+layout_mode = 2
+texture = ExtResource("2_cgeww")
+stretch_mode = 3

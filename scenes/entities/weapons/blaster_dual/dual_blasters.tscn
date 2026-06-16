@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clob0qlskfrl4" path="res://scenes/entities/weapons/blaster_dual/dual_blasters.gd" id="1_8wn5m"]
 [ext_resource type="PackedScene" uid="uid://20xf4u5v7fv4" path="res://graphics/weapons/GLB format/blaster-b.glb" id="1_safln"]
-[ext_resource type="PackedScene" uid="uid://b3rloeo6003j4" path="res://scenes/entities/projectiles/projectile.tscn" id="2_oyi3o"]
+[ext_resource type="PackedScene" uid="uid://cra32u1o11ttl" path="res://scenes/entities/projectiles/laser_small/laser_small.tscn" id="2_oyi3o"]
 [ext_resource type="PackedScene" uid="uid://dtc3pbth3fo3f" path="res://graphics/weapons/GLB format/blaster-c.glb" id="2_sqxlc"]
 [ext_resource type="AudioStream" uid="uid://dir5dvibiajx6" path="res://graphics/weapons/audio/laser1.ogg" id="4_neumv"]
 [ext_resource type="AudioStream" uid="uid://cgsyc0pdl0lte" path="res://graphics/weapons/audio/laser2.ogg" id="5_px2c4"]
@@ -117,6 +117,7 @@ _data = {
 transform = Transform3D(0.6810586, -0.2527632, 0.6872231, -0.09820992, 0.8985208, 0.42780858, -0.7256174, -0.35885376, 0.58711946, 0, 0, 0)
 script = ExtResource("1_8wn5m")
 projectile = ExtResource("2_oyi3o")
+laser_emission_color = Color(1, 0.6, 0, 1)
 rh_target = NodePath("Pivot/RHPivot/blaster-b2/RHTarget")
 lh_target = NodePath("Pivot/LHPivot/blaster-c2/LHTarget")
 weapon_skin = NodePath(".")
@@ -124,7 +125,7 @@ weapon_skin = NodePath(".")
 [node name="Pivot" type="Node3D" parent="." unique_id=1559776192]
 
 [node name="RHPivot" type="Node3D" parent="Pivot" unique_id=1440744750]
-transform = Transform3D(0.9601344, 0.23938528, 0.14434715, -0.26073757, 0.953096, 0.15369785, -0.10078379, -0.18520741, 0.977517, -0.0024380982, -0.032096148, -0.44646725)
+transform = Transform3D(0.9601342, 0.23938522, 0.14434715, -0.2607375, 0.95309573, 0.15369785, -0.100783765, -0.18520735, 0.977517, -0.0024380982, -0.032096148, -0.44646725)
 
 [node name="blaster-b2" parent="Pivot/RHPivot" unique_id=377804749 instance=ExtResource("1_safln")]
 transform = Transform3D(-0.9884169, -0.15170966, 0.004001215, -0.15171765, 0.98842174, -0.0017821267, -0.003684722, -0.002368562, -0.9999903, 0, -1.1920929e-07, 0.39999998)

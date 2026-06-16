@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://debmpm054nddi" path="res://scenes/entities/player/player.gd" id="1_1hmtu"]
 [ext_resource type="PackedScene" uid="uid://8h31713dfqns" path="res://scenes/entities/player/model/model.tscn" id="4_8akj5"]
+[ext_resource type="PackedScene" uid="uid://mfpxyowqi3o3" path="res://scenes/hud/hud.tscn" id="4_nh4ur"]
 [ext_resource type="Script" uid="uid://bs8jphfhn1sjg" path="res://scenes/entities/player/input_gatherer.gd" id="8_1murt"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_yel1f"]
@@ -22,3 +23,6 @@ player = NodePath("..")
 [node name="Collider" type="CollisionShape3D" parent="." unique_id=1686717812]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.875, 0)
 shape = SubResource("CapsuleShape3D_yel1f")
+
+[node name="HUD" parent="." unique_id=2078074000 instance=ExtResource("4_nh4ur")]
+offset_right = 3.0

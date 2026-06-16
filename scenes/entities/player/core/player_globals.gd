@@ -12,3 +12,5 @@ var player_can_climb : bool
 var player_can_hopup : bool
 
 var player_current_weapon : Weapon
+
+var player_input_direction : Vector2

@@ -10,8 +10,9 @@ var playback : AnimationNodeStateMachinePlayback
 
 static var state_priority : Dictionary = {
 	"stand" : 1,
-	"crouch": 2,
-	"sprint" : 3,
+	"emote": 2,
+	"crouch": 3,
+	"sprint" : 4,
 	"aim" : 5,
 	"shoot": 6,
 	"reload": 7,

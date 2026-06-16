@@ -33,7 +33,10 @@ func _process(delta: float) -> void:
 	head.rotation_degrees.y = rotation_vector.y
 	camera.fov = move_toward(camera.fov, target_fov, delta * fov_change_speed)
 	PlayerGlobals.player_camera_rotation = rotation
-	aim_target.position = camera_aim_cast.target_position
+	if camera_aim_cast.is_colliding():
+		aim_target.global_position = camera_aim_cast.get_collision_point()
+	else:
+		aim_target.global_position = camera_aim_cast.global_position + (camera_aim_cast.global_transform.basis * camera_aim_cast.target_position)
 
 func _unhandled_input(event: InputEvent) -> void:
 	var is_camera_motion := (

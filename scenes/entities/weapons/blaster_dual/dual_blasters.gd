@@ -7,6 +7,7 @@ class_name DualBlasters
 
 @onready var muzzle_right : Marker3D = $Pivot/MuzzleR
 @onready var muzzle_left : Marker3D = $Pivot/MarkerL
+@export var laser_emission_color : Color = Color.WHITE
 
 var shoot_direction_right : Vector3 = Vector3.ZERO
 var shoot_direction_left : Vector3 = Vector3.ZERO
@@ -46,5 +47,8 @@ func shoot_projectile(muzzle : Marker3D, shoot_direction : Vector3) -> void:
 	new_projectile.global_transform = muzzle.global_transform
 	
 	new_projectile.direction = shoot_direction
+	
+	if new_projectile.has_method("set_emission_color"):
+		new_projectile.set_emission_color(laser_emission_color)
 	
 	get_tree().current_scene.add_child(new_projectile)

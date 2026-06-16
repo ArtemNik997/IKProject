@@ -3,6 +3,7 @@ class_name BlasterSecondary
 
 @export var weapon_slot = "secondary"
 @export var projectile : PackedScene
+@export var laser_emission_color : Color = Color.WHITE
 
 @onready var animation_player : AnimationPlayer = $AnimationPlayer
 @onready var muzzle : Marker3D = $Muzzle
@@ -36,5 +37,8 @@ func shoot_projectile() -> void:
 	new_projectile.global_transform = muzzle.global_transform
 	
 	new_projectile.direction = shoot_direction
+	
+	if new_projectile.has_method("set_emission_color"):
+		new_projectile.set_emission_color(laser_emission_color)
 	
 	get_tree().current_scene.add_child(new_projectile)

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://by7rloj2kd8b8"]
 
 [ext_resource type="Script" uid="uid://c5hyviar76fu" path="res://scenes/entities/weapons/blaster_primary/blaster_primary.gd" id="1_jo263"]
-[ext_resource type="PackedScene" uid="uid://b3rloeo6003j4" path="res://scenes/entities/projectiles/projectile.tscn" id="2_0src8"]
+[ext_resource type="PackedScene" uid="uid://bh3p522pmwuxf" path="res://scenes/entities/projectiles/laser_medium/laser_medium.tscn" id="2_0src8"]
 [ext_resource type="PackedScene" uid="uid://dimmd47kh484u" path="res://graphics/weapons/GLB format/blaster-d.glb" id="2_jo263"]
 [ext_resource type="AudioStream" uid="uid://c0qh7ugh34sr1" path="res://graphics/weapons/audio/laser3.ogg" id="3_b7uum"]
 
@@ -46,6 +46,7 @@ _data = {
 transform = Transform3D(1.0000025, 0, 0, 0, 1.0000017, 0, 0, 0, 1.0000017, 0, 0, 0)
 script = ExtResource("1_jo263")
 projectile = ExtResource("2_0src8")
+laser_emission_color = Color(0.67058825, 0, 0.91764706, 1)
 rh_target = NodePath("Pivot/RHTarget")
 lh_target = NodePath("Pivot/LHTarget")
 weapon_skin = NodePath("Pivot")
@@ -63,7 +64,7 @@ transform = Transform3D(-1.0000004, 1.1920929e-07, 0, 0, -0.010698631, 0.9999431
 transform = Transform3D(-0.05855693, -0.78271496, 0.61961925, 0.9969222, -0.013443366, 0.07723184, -0.05212076, 0.62223595, 0.7810923, 0.09491953, -0.06482768, 0.123294234)
 
 [node name="Muzzle" type="Marker3D" parent="." unique_id=952233608]
-transform = Transform3D(1, 5.9604645e-08, -1.1920929e-07, 0, 0.9999997, 1.4901161e-08, 0, 5.9604645e-08, 0.9999999, 0.533106, 0.44271436, 0.40669882)
+transform = Transform3D(1, 5.9604645e-08, -1.1920929e-07, 0, 0.99999964, 1.4901161e-08, 0, 5.9604645e-08, 0.9999999, 0.533106, 0.44271436, 0.40669882)
 
 [node name="Audio" type="Node3D" parent="." unique_id=140414741]
 

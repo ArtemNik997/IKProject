@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bh3p522pmwuxf"]
+
+[ext_resource type="Script" uid="uid://c03g6386nnsco" path="res://scenes/entities/projectiles/laser/laser.gd" id="1_nxdop"]
+[ext_resource type="Material" uid="uid://b76fgult206mc" path="res://resources/laser_material.tres" id="2_tqjaf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3ptmc"]
+radius = 0.05
+height = 0.5
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_3ptmc"]
+radius = 0.05
+height = 1.0
+
+[node name="LaserMedium" type="Area3D" unique_id=138085099]
+collision_layer = 8
+collision_mask = 23
+script = ExtResource("1_nxdop")
+speed = 60.0
+metadata/_custom_type_script = "uid://bn3efkyecem3t"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=536503386]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_3ptmc")
+
+[node name="Mesh" type="MeshInstance3D" parent="." unique_id=1833431824 groups=["projectile"]]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+mesh = SubResource("CapsuleMesh_3ptmc")
+surface_material_override/0 = ExtResource("2_tqjaf")

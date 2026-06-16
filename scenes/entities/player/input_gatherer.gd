@@ -6,6 +6,7 @@ var rotation_vector : Vector3 = Vector3.ZERO
 func gather_input() -> InputPackage:
 	var new_input = InputPackage.new()
 	new_input.player_input = -Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
+	PlayerGlobals.player_input_direction = new_input.player_input
 	new_input.input_direction = new_input.player_input.rotated(-PlayerGlobals.player_camera_rotation.y)
 	
 	if Input.is_action_pressed("crouch"):
@@ -41,6 +42,9 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_just_pressed("get_dual_blasters"):
 		PlayerEvents.on_weapon_switch.emit("dual")
+	
+	if Input.is_action_just_pressed("emote"):
+		new_input.actions.append("emote")
 	
 	if new_input.actions.is_empty():
 		new_input.actions.append("stand")
